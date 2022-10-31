@@ -1,0 +1,9 @@
+# .class file
+*.class
+
+# Sample input and output
+sampleInput
+sampleOutput
+
+# .txt file
+*.txt
