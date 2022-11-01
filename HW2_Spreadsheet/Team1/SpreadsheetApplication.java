@@ -47,6 +47,13 @@ public class SpreadsheetApplication {
         if (this.data == null) {
             this.data = new LinkedHashMap<>();    
         }
+        
+        if(data.containsKey(newItem)){
+            int oldValue = data.get(newItem);
+            data.remove(newItem);
+            this.totalItemValue -= oldValue;
+        }
+        
         this.data.put(newItem, newValue);
         this.totalItemValue += newValue;
     }
