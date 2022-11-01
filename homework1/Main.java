@@ -17,13 +17,13 @@ public class Main {
         stretchability = Integer.parseInt(inputTokens[4]);
         content = inputTokens[5];
         if (naturalSize <= 0) {
-            throw new Exception("The size of a component may be positive integer.");
+            throw new Exception("The size of a component should be a positive integer.");
         }
         if (shrinkability <= 0) {
-            throw new Exception("The shrinkability of a component may be positive integer.");
+            throw new Exception("The shrinkability of a component should be a positive integer.");
         }
         if (stretchability <= 0) {
-            throw new Exception("The stretchability of a component may be positie integer.");
+            throw new Exception("The stretchability of a component should be a positie integer.");
         }
 
         if (inputTokens[0].equals("Text")) {
@@ -44,7 +44,7 @@ public class Main {
         id = Integer.parseInt(inputTokens[1]);
         newSize = Integer.parseInt(inputTokens[2]);
         if (newSize <= 0) {
-            throw new Exception("The new size may be positive integer.");
+            throw new Exception("The new size should be a positive integer.");
         }
         
         composition.getComponents()
