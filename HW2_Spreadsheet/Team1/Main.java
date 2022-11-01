@@ -12,15 +12,15 @@ class Main {
                 String[] keyValuePair = line.split(" ");
                 switch (keyValuePair[0]) {
                     case "data":
-                    spreadsheetApplication.addData(keyValuePair[1], Integer.parseInt(keyValuePair[2]));
+                        spreadsheetApplication.addData(keyValuePair[1], Integer.parseInt(keyValuePair[2]));
                         break;
                     case "addChart":
-                    spreadsheetApplication.addPresentation(keyValuePair[1]);
-                    break;
+                        spreadsheetApplication.addPresentation(keyValuePair[1]);
+                        break;
                     case "change":
-                    System.out.println(String.format("%s change %s %s.", keyValuePair[1], keyValuePair[2], keyValuePair[3]));
-                    spreadsheetApplication.update(keyValuePair[2], Integer.parseInt(keyValuePair[3]));
-                    break;
+                        System.out.println(String.format("%s change %s %s.", keyValuePair[1], keyValuePair[2], keyValuePair[3]));
+                        spreadsheetApplication.update(keyValuePair[2], Integer.parseInt(keyValuePair[3]));
+                        break;
                     default:
                         break;
                 }

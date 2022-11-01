@@ -31,14 +31,14 @@ public class SpreadsheetApplication {
         Presentation p = null;
         switch(chartType){
             case "Spreadsheet":
-            p = new SpreadSheet(this);
-            break;
+                p = new SpreadSheet(this);
+                break;
             case "BarChart":
-            p = new BarChart(this);
-            break;
+                p = new BarChart(this);
+                break;
             case "PieChart":
-            p = new PieChart(this);
-            break;
+                p = new PieChart(this);
+                break;
         }
         this.presentations.add(p);
     }
