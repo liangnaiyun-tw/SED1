@@ -6,7 +6,7 @@ Text 4 12 5 72 meet
 Text 5 12 5 72 you
 GraphicalElement 6 20 10 100 scared.jpg
 Text 7 1 1 1 <ParagraphEnd>
-ChangeSize 7 15
+ChangeSize 9 15
 Require SimpleComposition
 Require TexComposition
 Require ArrayComposition

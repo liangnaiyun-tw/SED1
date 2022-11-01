@@ -46,14 +46,11 @@ public class Main {
         if (newSize <= 0) {
             throw new Exception("The new size may be positive integer.");
         }
-
-        for (Component component: composition.getComponents()) {
-            if (component.getId() == id) {
-                component.changeSize(newSize);
-                return;
-            }
-        }
-        throw new Exception("No matched id found");
+        
+        composition.getComponents()
+                    .stream().filter(component -> component.getId() == id)
+                    .findFirst().orElseThrow(() -> new Exception("No matched id found."))
+                    .changeSize(newSize);
     }
 
     private static void parseCommandRequireLayout(Composition composition, String[] inputTokens) throws Exception {
@@ -86,8 +83,8 @@ public class Main {
             String[] inputTokens;
 
             inputBuffer = new BufferedReader(new FileReader(args[0]));
-            try {
-                while((inputLine = inputBuffer.readLine()) != null) {
+            while((inputLine = inputBuffer.readLine()) != null) {
+                try {
                     inputTokens = inputLine.split("\\s+");
                     if (inputTokens.length == 6 &&
                         (inputTokens[0].equals("Text") || inputTokens[0].equals("GraphicalElement"))) {
@@ -104,9 +101,9 @@ public class Main {
                         throw new Exception("No command matched");
                     }
                 }
-            }
-            catch (Exception inputError) {
-                System.out.println("Input Error");
+                catch (Exception inputError) {
+                    System.out.println("Input Error");
+                }
             }
         }
         catch (Exception bufferError) {
