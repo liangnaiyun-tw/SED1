@@ -2,7 +2,7 @@
 sampleInput
 sampleOutput
 
-# .txt file
+# Text file
 *.txt
 
 ## .gitignore template
