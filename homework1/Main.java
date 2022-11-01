@@ -25,6 +25,12 @@ public class Main {
         if (stretchability <= 0) {
             throw new Exception("The stretchability of a component should be a positie integer.");
         }
+        if (stretchability < shrinkability) {
+            throw new Exception("Stretchability should be greater or equal to shrinkability.");
+        }
+        if (naturalSize < shrinkability || stretchability < naturalSize) {
+            throw new Exception("The natural size should be in the range between shrinkability and stretchability.");
+        }
 
         if (inputTokens[0].equals("Text")) {
             composition.addComponent(new TextElement(id, content, naturalSize, stretchability, shrinkability));
