@@ -8,8 +8,8 @@ class Main {
         SpreadsheetApplication spreadsheetApplication = new SpreadsheetApplication();
 
         try (BufferedReader reader = new BufferedReader(new FileReader(args[0]))) {
-            try {
-                while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
+                try {
                     String[] keyValuePair = line.split(" ");
                     switch (keyValuePair[0]) {
                         case "data":
@@ -25,9 +25,9 @@ class Main {
                         default:
                             throw new Exception("No command matched");
                     }
+                } catch (Exception e) {
+                    System.out.println("Input error");
                 }
-            } catch (Exception e) {
-                System.out.println("Input error");
             }
             
         } catch (IOException e) {
