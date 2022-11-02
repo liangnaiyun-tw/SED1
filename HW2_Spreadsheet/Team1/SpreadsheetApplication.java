@@ -6,7 +6,7 @@ public class SpreadsheetApplication {
 
     private LinkedHashMap<String, Integer> data;
     private List<Presentation> presentations;
-    public static int totalItemValue = 0;
+    
     
     public LinkedHashMap<String, Integer> getData(){
         return this.data;
@@ -51,11 +51,9 @@ public class SpreadsheetApplication {
         if(data.containsKey(newItem)){
             int oldValue = data.get(newItem);
             data.remove(newItem);
-            this.totalItemValue -= oldValue;
         }
         
         this.data.put(newItem, newValue);
-        this.totalItemValue += newValue;
     }
 
     public void update(String newItem, int newValue){
