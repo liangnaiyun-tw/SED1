@@ -22,6 +22,7 @@ class Main {
                         spreadsheetApplication.update(keyValuePair[2], Integer.parseInt(keyValuePair[3]));
                         break;
                     default:
+                        System.out.println("Input error");
                         break;
                 }
             }
