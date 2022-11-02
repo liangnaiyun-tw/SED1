@@ -49,7 +49,6 @@ public class SpreadsheetApplication {
         }
         
         if(data.containsKey(newItem)){
-            int oldValue = data.get(newItem);
             data.remove(newItem);
         }
         
