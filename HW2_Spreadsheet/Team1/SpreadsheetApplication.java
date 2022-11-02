@@ -48,10 +48,6 @@ public class SpreadsheetApplication {
             this.data = new LinkedHashMap<>();    
         }
         
-        if(data.containsKey(newItem)){
-            data.remove(newItem);
-        }
-        
         this.data.put(newItem, newValue);
     }
 
