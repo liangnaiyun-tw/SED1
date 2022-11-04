@@ -1,8 +1,8 @@
-## Issue Description
+## Feature/Bug Description
 Clearly and concisely describe the issue.
 
 ## Root cause
-(Optional) Briefly describe the root cause analysis of the problem. Feel free to leave blank if this PR is not a bugfix.
+(Optional) Briefly describe the root cause and analysis of the problem. Feel free to leave blank if this PR is not a bugfix.
 
 ## Solution
 Describe your code changes in detail.
