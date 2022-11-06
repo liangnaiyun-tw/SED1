@@ -1,0 +1,19 @@
+name: name Java CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: [windows-latest]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+          architecture: x64
+      - name: Run the Maven
+        run: |
+          cd .\playground\homework1\testcase
+          .\test.ps1
