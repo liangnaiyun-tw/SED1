@@ -1,9 +1,15 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class FileViewer {
-    private ArrayList<View> views = new ArrayList<>();
+    private List<View> views = new ArrayList<>();
 
-    public void attach(View view){
+    public void attach(View view) throws Exception {
+        for(View v: views){
+            if(v.equals(view)){
+                throw new Exception("The same view name was used");
+            }
+        }
         views.add(view);
     }
     public void detach(View view){
@@ -16,7 +22,7 @@ public class FileViewer {
                 .display();
     }
 
-    public void addElementForView(String viewName, String elementName) throws Exception {
+    public void addElementToView(String viewName, String elementName) throws Exception {
         Element element;
         if(elementName.equals(ScrollBar.name)){
             element = new ScrollBar();

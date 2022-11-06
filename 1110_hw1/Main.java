@@ -44,11 +44,11 @@ public class Main {
 
     private static void parseCommandAdd(FileViewer viewer, String name, String[] elementNames) throws Exception {
         for(String elementName: elementNames){
-            viewer.addElementForView(name, elementName);
+            viewer.addElementToView(name, elementName);
         }
     }
 
-    private static void parseCommandNew(FileViewer viewer, String name, String text) {
+    private static void parseCommandNew(FileViewer viewer, String name, String text) throws Exception {
         viewer.attach(new TextView(name,text));
     }
 
