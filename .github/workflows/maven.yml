@@ -1,6 +1,12 @@
 name: name Java CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - auto_test_pr
+      paths:
+        - '**/homework1/code/**'
+
 
 jobs:
   build:
