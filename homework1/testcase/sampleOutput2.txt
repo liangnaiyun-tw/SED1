@@ -1,5 +1,5 @@
 Input Error
-[12]Hi
+[10]Hi
 [1]<ParagraphEnd>
 [12]nice
 [12]to
@@ -7,8 +7,8 @@ Input Error
 [12]you
 [20]scared.jpg
 [1]<ParagraphEnd>
-[12]Hi [1]<ParagraphEnd>
+[10]Hi [1]<ParagraphEnd>
 [12]nice [12]to [12]meet [12]you [20]scared.jpg [1]<ParagraphEnd>
-[12]Hi [1]<ParagraphEnd> [12]nice
+[10]Hi [1]<ParagraphEnd> [12]nice
 [12]to [12]meet [12]you
 [20]scared.jpg [1]<ParagraphEnd>

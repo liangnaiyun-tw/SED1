@@ -27,4 +27,5 @@ foreach($sampleInput in $sampleInputs) {
     if ($compareResult) {
         throw "Test cases failed."
     }
+    Write-Output "Correct"
 }
