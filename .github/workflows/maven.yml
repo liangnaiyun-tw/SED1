@@ -1,4 +1,4 @@
-name: name Java CI
+name: Java auto test
 
 on:
   push:
