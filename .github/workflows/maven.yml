@@ -2,9 +2,9 @@ name: name Java CI
 
 on:
   push:
-    branch:
+    branches:
       - auto_test_pr
-    path:
+    paths:
       - '**/homework1/code/**'
 
 
