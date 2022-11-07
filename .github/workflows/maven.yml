@@ -2,6 +2,8 @@ name: name Java CI
 
 on:
   push:
+    branch:
+      - auto_test_pr
     path:
       - '**/homework1/code/**'
 
