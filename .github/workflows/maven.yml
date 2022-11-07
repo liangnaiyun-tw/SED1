@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - auto_test_pr
-      paths:
-        - '**/homework1/code/**'
+      # paths:
+      #   - '**/homework1/code/**'
 
 
 jobs:
