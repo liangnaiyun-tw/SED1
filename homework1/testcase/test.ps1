@@ -21,7 +21,7 @@ foreach($sampleInput in $sampleInputs) {
     powershell /c $exeCommand | Out-File -FilePath $resultFile
     $executeResult = gc ${resultFile} | %{$i = 1} {new-object psobject -prop @{Text=$_.Trim(); LineNum=$i}; $i++}
     
-    Write-Output "`nCompare $($sampleOutput.Substring(2)) <--> $($resultFile.Substring(12))"
+    Write-Output "Compare $($sampleOutput.Substring(2)) <--> $($resultFile.Substring(12))"
     $compareResult = Compare-Object $expectedResult $executeResult -Property Text -passThru -caseSensitive | Format-Table @{Name="Side"; Expression={$_.SideIndicator}}, LineNum, Text
     Write-Output $compareResult
     if ($compareResult) {

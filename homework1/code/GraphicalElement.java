@@ -3,6 +3,4 @@ public class GraphicalElement extends Component {
                             int naturalSize, int stretchability, int shrinkability) {
         super(id, content, naturalSize, stretchability, shrinkability);
     }
-
-    public void test() {}
 }
