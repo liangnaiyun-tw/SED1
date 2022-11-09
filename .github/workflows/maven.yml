@@ -5,7 +5,7 @@ on:
     branches:
       - auto_test_pr
     paths:
-      - '**/1103_hw1/code/**'
+      - '**/1110_hw1/code/**'
 
 
 jobs:
@@ -21,5 +21,5 @@ jobs:
           architecture: x64
       - name: Run the Maven
         run: |
-          cd .\1103_hw1\testcase
-          .\test.ps1
+          cd .\1110_hw1\test
+          .\testTemplate.ps1

@@ -1,5 +1,5 @@
 $codeFolder = "\code"
-$testFolder = "\testcase"
+$testFolder = "\test"
 
 Write-Output "Remove results files..."
 powershell /c "rm .\result*.txt"
