@@ -12,7 +12,6 @@ public class ArrayStrategy implements LinebreakingStrategy {
             else {
                 System.out.print(" ");
             }
-            System.out.println(count);
         }
     }
 }
