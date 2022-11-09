@@ -1,6 +1,7 @@
 name: Java auto test
 
-on: 
+on:
+  workflow_dispatch:
   push:
     branches:
       - auto_test_pr
