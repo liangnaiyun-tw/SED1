@@ -25,26 +25,11 @@ on:
         type: environment
         required: true
 
-jobs:
-  log-the-inputs:
-    runs-on: windows-latest
-    steps:
-      - run: |
-          echo "Log level: $LEVEL"
-          echo "Tags: $TAGS"
-          echo "Environment: $ENVIRONMENT"
-        env:
-          LEVEL: ${{ inputs.logLevel }}
-          TAGS: ${{ inputs.tags }}
-          ENVIRONMENT: ${{ inputs.environment }}
-
-on:
   push:
     branches:
       - auto_test_pr
     paths:
       - '**/1103_hw1/code/**'
-
 
 jobs:
   build:
