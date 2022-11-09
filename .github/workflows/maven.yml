@@ -12,9 +12,6 @@ on:
         - info
         - warning
         - debug
-  push:
-    branches:
-      - auto_test_pr
 
 jobs:
   build:
