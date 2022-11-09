@@ -1,14 +1,8 @@
 name: Java auto test
 
-on:
-  workflow_dispatch:
-    branches:
-      - auto_test_pr
-  push:
-    branches:
-      - auto_test_pr
-    paths:
-      - '**/1103_hw1/code/**'
+on: [workflow_dispatch, push]
+  branches:
+    - auto_test_pr
 
 jobs:
   build:
