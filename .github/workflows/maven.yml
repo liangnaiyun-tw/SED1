@@ -2,6 +2,7 @@ name: Java auto test
 
 on:
   workflow_dispatch:
+    inputs:
   push:
     branches:
       - auto_test_pr
