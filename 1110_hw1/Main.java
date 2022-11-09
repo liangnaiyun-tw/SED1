@@ -26,7 +26,7 @@ public class Main {
                         parseCommandNew(viewer, inputTokens[0], inputTokens[1]);
                     }
                     else if(inputTokens.length >= 3 && inputTokens[1].equals("add")){
-                        parseCommandAdd(viewer, inputTokens[0], Arrays.copyOfRange(inputTokens,2,inputTokens.length));
+                        parseCommandAdd(viewer, inputTokens[0], Arrays.copyOfRange(inputTokens, 2, inputTokens.length));
                     }
                     else{
                         throw new Exception("Invalid command format!");
@@ -49,7 +49,7 @@ public class Main {
     }
 
     private static void parseCommandNew(FileViewer viewer, String name, String text) throws Exception {
-        viewer.attach(new TextView(name,text));
+        viewer.attach(new TextView(name, text));
     }
 
     private static void parseCommandDisplay(FileViewer viewer, String viewName) throws Exception {

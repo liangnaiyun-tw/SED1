@@ -11,7 +11,7 @@ public class TextView extends View{
     void display() {
         System.out.print(text);
         for(Element element: elements){
-            System.out.print(" "+element.getName());
+            System.out.print(" " + element.getName());
         }
         System.out.println();
     }
