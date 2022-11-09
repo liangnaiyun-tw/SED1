@@ -114,7 +114,7 @@ After running `push` command, `maven.yml` should run the testing process, and ge
 ![](https://i.imgur.com/LVZHLqc.png)
 
 (4) Click build on the jobs tab, the result of the test lies in `Run the Maven` tab
-![](https://i.imgur.com/HCVwQEd.png)
+![](https://i.imgur.com/1d3uhCT.png)
 
 (5) In commit list<br>
 ![](https://i.imgur.com/QSeYC9m.png)
