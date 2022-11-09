@@ -48,9 +48,9 @@ Use `push` command as before.
 In commit list
 ![](https://i.imgur.com/QSeYC9m.png)
 
-Green check means the commit pass the test, and red cross is not. The commit without above two means that the change in the commit does not trigger the testing process.
+Green check means the commit pass the test, and red cross is not. The commit without above two symbols means that the change in the commit does not trigger the testing process.
 
-The branch can be merged into main branch unless the latest workflow pass the test.
+The branch can be merged into main branch unless the latest marked workflow pass the test.
 
 > **Note**<br>
 > For changes in `TestFolder`, the test event will not be triggered.
@@ -122,9 +122,9 @@ After running `push` command, `maven.yml` should run the testing process, and ge
 (6) In `TestFolder`
 ![](https://i.imgur.com/GsjJtU3.png)
 
-Green check means the commit pass the test, and red cross is not. The commit without above two means that the change in the commit does not trigger the testing process.
+Green check means the commit pass the test, and red cross is not. The commit without above two symbols means that the change in the commit does not trigger the testing process.
 
-The branch can be merged into main branch unless the latest workflow pass the test.
+The branch can be merged into main branch unless the latest marked workflow pass the test.
 ## How Should Your Folder be Structured
 The directory `YourFolder` should be structured like below to trigger testing process.
 ```
