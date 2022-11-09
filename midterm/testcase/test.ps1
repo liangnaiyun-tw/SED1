@@ -2,7 +2,7 @@ $codeFolder = "\src"
 $testFolder = "\testcase"
 
 Write-Output "Remove results files..."
-powershell /c "rm .\result*.txt"
+powershell /c "rm .\result*"
 Write-Output "Remove compiled class..."
 powershell /c "rm ..$($codeFolder)\*.class"
 Write-Output "Compile java files..."
