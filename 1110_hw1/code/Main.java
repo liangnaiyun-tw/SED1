@@ -54,6 +54,6 @@ public class Main {
 
     private static void parseCommandDisplay(FileViewer viewer, String viewName) throws Exception {
         viewer.displayView(viewName);
-	   System.out.println("steven ha");
+	   System.out.println("steven haha");
     }
 }
