@@ -53,7 +53,7 @@ Green check means the commit pass the test, and red cross is not. The commit wit
 The branch can be merged into main branch unless the latest workflow pass the test.
 
 > **Note**<br>
-> For changes in `TestFolder`, the test event will not triggered.
+> For changes in `TestFolder`, the test event will not be triggered.
 
 # Auto Testing
 ## Maven Configuration
