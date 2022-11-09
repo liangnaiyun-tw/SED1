@@ -1,26 +1,55 @@
 # Testcase document
 
-## Case1 
-- Description: Basic flow
+## Case
+- Description:
 
 - Input: 
-```
-TextView1 Hi
-TextView2 Hello
-TextView2 add scrollBar
-TextView2 display
-TextView3 HelloWorld
-TextView3 add scrollBar thickBlackBorder
-TextView3 display
-TextView1 display
-```
+
 
 - Output: 
-```
-Hello scrollBar
-HelloWorld scrollBar thickBlackBorder
-Hi
-```
+
+## Case
+- Description:
+
+- Input: 
+
+
+- Output: 
+## Case
+- Description:
+
+- Input: 
+
+
+- Output: 
+## Case
+- Description:
+
+- Input: 
+
+
+- Output: 
+## Case
+- Description:
+
+- Input: 
+
+
+- Output: 
+## Case
+- Description:
+
+- Input: 
+
+
+- Output: 
+## Case
+- Description:
+
+- Input: 
+
+
+- Output: 
 
 
 ## Case2
