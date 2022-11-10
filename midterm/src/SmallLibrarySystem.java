@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class SmallLibrarySystem {
     private List<BookCopy> bookCopies;
@@ -30,12 +31,105 @@ public class SmallLibrarySystem {
     // + checkOut(bookCopyIds: List<Integer>, staffName: String, borrowerName:
     // String): void
     public void checkOut(List<Integer> bookCopyIds, String staffName, String borrowName) throws Exception {
+        User staff = null;
+        Borrower borrower = null;
+
+        if (getUserByName(staffName) == null) {
+            throw new Exception("Error");
+        } else {
+            staff = getUserByName(staffName);
+        }
+
+        if (getUserByName(borrowName) == null) {
+            throw new Exception("Error");
+        } else {
+            User user = getUserByName(borrowName);
+            borrower = ((Borrower)user);
+        }
+
+        if (!isStaff(staffName)) {
+            throw new Exception("Borrower can not check out the books");
+        }
+
+        if (!isBorrower(borrowName)) {
+            throw new Exception("Error");
+        }
+
+        // check bookCopy exists
+        bookCopyIds.forEach(bId -> {
+            Optional<BookCopy> bookCopies = this.bookCopies.stream().filter(b -> b.getId() == bId).findAny();
+            if (bookCopies.isPresent()) {
+
+            } else {
+                try {
+                    throw new Exception("Error");
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // check Borrower can check out the books count
+        if (bookCopyIds.size() > borrower.getMaxCopy()) {
+            throw new Exception(
+                    "Can not check out since the number of books exceed the limitation of user can check-out");
+        }
+
+        // check bookCopy status is AVAILABLEFORCHECKOUT
+        bookCopyIds.forEach(bId -> {
+            Optional<BookCopy> bookCopies = this.bookCopies.stream().filter(b -> b.getStatus() == Status.CHECKEDOUT)
+                    .findAny();
+            if (bookCopies.isPresent()) {
+                try {
+                    throw new Exception("Can not check out since the book is checked out");
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        bookCopyIds.forEach(bId -> {
+            CheckOut checkOut = new CheckOut();
+            checkOut.setBookCopy(getBookCopyById(bId));
+            User user = getUserByName(borrowName);
+            checkOut.setBorrower((Borrower)user);
+            checkouts.add(checkOut);
+        });
 
     }
 
     // + returnBook(bookCopyId: int, staffName: String): void
     public void returnBook(int bookCopyId, String staffName) throws Exception {
+        User staff = null;
 
+        if (getUserByName(staffName) == null) {
+            throw new Exception("Error");
+        } else {
+            staff = getUserByName(staffName);
+        }
+
+        if (!isStaff(staffName)) {
+            throw new Exception("Borrower can not return book");
+        }
+
+        BookCopy bookCopy = getBookCopyById(bookCopyId);
+        if (bookCopy == null) {
+            throw new Exception("Error");
+        } else {
+            if(bookCopy.getStatus().equals(Status.CHECKEDOUT)){
+                bookCopy.setStatus(Status.AVAILABLEFORCHECKOUT);
+                checkouts.forEach(c -> {
+                    if(c.getBookCopy().getId() == bookCopy.getId()){
+                        this.checkouts.remove(c);
+                    }
+                });
+            } 
+            else{
+                throw new Exception("Can not return since the book isn't checked out");
+            }
+        }
     }
 
     // + addBook(bookCopy: BookCopy, staffName: String): void
