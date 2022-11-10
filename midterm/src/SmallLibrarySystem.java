@@ -61,17 +61,17 @@ public class SmallLibrarySystem {
             throw new Exception("Error");
         }
 
+        // check if the user is a staff
+        if (!isStaff(staffName)) {
+            throw new Exception("Borrower can not check out the books");
+        }
+
         // check if the borrower exists
         if (getUserByName(borrowName) == null) {
             throw new Exception("Error");
         } else {
             User user = getUserByName(borrowName);
             borrower = ((Borrower) user);
-        }
-
-        // check if the user is a staff
-        if (!isStaff(staffName)) {
-            throw new Exception("Borrower can not check out the books");
         }
 
         // check if the user is a borrower

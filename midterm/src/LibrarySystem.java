@@ -217,6 +217,8 @@ public class LibrarySystem {
             SmallLibrarySystem librarySystem = parseInitial(inputFile);
             while ((inputLine = inputFile.readLine()) != null) {
                 try {
+                    System.out.println(inputLine);
+
                     inputTokens = inputLine.split("\\s+");
                     if (inputTokens.length == 2 && inputTokens[1].equals("addBook")) {
                         parseCommandAddBook(librarySystem, inputTokens[0], inputFile);
@@ -237,8 +239,8 @@ public class LibrarySystem {
                     } else {
                         throw new Exception("Error");
                     }
-                    // System.out.println(inputLine);
-                    // librarySystem.printState();
+
+                    librarySystem.printState();
                 } catch (Exception e) {
                     System.out.println("Error");
                 }
