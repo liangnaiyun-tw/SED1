@@ -116,6 +116,14 @@ public class LibrarySystem {
             BufferedReader inputFile) throws Exception {
         List<Integer> bookIds = new ArrayList<>();
 
+        try {
+            system.checkOut(null, staffName, borrower);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+
         String inputLine;
         String[] inputTokens;
         try {
