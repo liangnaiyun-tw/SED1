@@ -11,8 +11,9 @@ powershell /c "javac ..$($codeFolder)\*.java"
 $sampleInputs = Get-ChildItem -Name | Select-String -Pattern "sample*"
 foreach($sampleInput in $sampleInputs) {
     [string] $sampleInput = $sampleInput
-    $extension = $sampleInput.Substring(11);
-    $sampleOutput = ".\sampleOutput" + $extension;
+    $length = $sampleInput.length
+    $extension = $sampleInput.Substring(0, $length-3);
+    $sampleOutput = ".\" + $extension + ".out"
     $expectedResult = gc ${sampleOutput} | %{$i = 1} {new-object psobject -prop @{Text=$_.Trim(); LineNum=$i}; $i++}
 
     Write-Output "`nSample input: $($sampleInput)"
