@@ -53,15 +53,15 @@ public class SmallLibrarySystem {
     // + checkOut(bookCopyIds: List<Integer>, staffName: String, borrowerName:
     // String): void
     public void checkOut(List<Integer> bookCopyIds, String staffName, String borrowName) throws Exception {
-        User staff = null;
+        User staff = getUserByName(staffName);
         Borrower borrower = null;
 
-        if (getUserByName(staffName) == null) {
+        // check if the staff exists
+        if (staff == null) {
             throw new Exception("Error");
-        } else {
-            staff = getUserByName(staffName);
         }
 
+        // check if the borrower exists
         if (getUserByName(borrowName) == null) {
             throw new Exception("Error");
         } else {
@@ -69,28 +69,23 @@ public class SmallLibrarySystem {
             borrower = ((Borrower) user);
         }
 
+        // check if the user is a staff
         if (!isStaff(staffName)) {
             throw new Exception("Borrower can not check out the books");
         }
 
+        // check if the user is a borrower
         if (!isBorrower(borrowName)) {
             throw new Exception("Error");
         }
 
         // check bookCopy exists
-        bookCopyIds.forEach(bId -> {
-            Optional<BookCopy> bookCopies = this.bookCopies.stream().filter(b -> b.getId() == bId).findAny();
-            if (bookCopies.isPresent()) {
-
-            } else {
-                try {
-                    throw new Exception("Error");
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+        for (Integer bookId : bookCopyIds) {
+            BookCopy bookCopy = this.getBookCopyById(bookId);
+            if (bookCopy == null) {
+                throw new Exception("Error");
             }
-        });
+        }
 
         // check Borrower can check out the books count
         if (bookCopyIds.size() > borrower.getMaxCopy()) {
@@ -99,18 +94,12 @@ public class SmallLibrarySystem {
         }
 
         // check bookCopy status is AVAILABLEFORCHECKOUT
-        bookCopyIds.forEach(bId -> {
-            Optional<BookCopy> bookCopies = this.bookCopies.stream().filter(b -> b.getStatus() == Status.CHECKEDOUT)
-                    .findAny();
-            if (bookCopies.isPresent()) {
-                try {
-                    throw new Exception("Can not check out since the book is checked out");
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+        for (Integer bookId : bookCopyIds) {
+            BookCopy bookCopy = getBookCopyById(bookId);
+            if (bookCopy.getStatus() != Status.AVAILABLEFORCHECKOUT) {
+                throw new Exception("Can not check out since the book is checked out");
             }
-        });
+        }
 
         bookCopyIds.forEach(bId -> {
             CheckOut checkOut = new CheckOut();
