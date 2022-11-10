@@ -11,7 +11,7 @@ UserA removeBook 3
 UserA checkout UserB
 0 1
 UserA return 0
+UserA listAuthor AuthorE
+UserC listAuthor AuthorA
 UserA listAuthor AuthorA
-UserA listSubject SubjectA
-UserA findChecked UserB
-UserA Borrower 1
+

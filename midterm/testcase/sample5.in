@@ -1,0 +1,29 @@
+3
+AuthorA SubjectA
+AuthorB SubjectB
+AuthorC SubjectC
+4
+Staff UserA
+Borrower UserB 2
+Staff UserC
+Borrower UserD 2
+UserA addBook
+AuthorD SubjectD
+UserA removeBook 3
+UserB checkout UserD
+UserA checkout UserC
+UserB checkout UserC
+UserA checkout UserB
+0 5
+UserA checkout UserB
+0 1 2 
+UserA checkout UserB
+0 1 
+UserC checkout UserD
+0
+
+
+
+
+
+
