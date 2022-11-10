@@ -60,23 +60,93 @@ public class SmallLibrarySystem {
 
     // + findOutCheckBooks(staffName: String, borrowerName: String): List<BookCopy>
     public List<BookCopy> findOutCheckBooks(String staffName, String borrowName) throws Exception {
-        return null;
+
+        List<BookCopy> borrowedBooks = new ArrayList<>();
+
+        if(isBorrower(staffName)){
+            if(staffName.equals(borrowName)){
+                for(CheckOut checkout: checkouts){
+                    if(checkout.getBorrower().getName().equals(borrowName)){
+                        borrowedBooks.add(checkout.getBookCopy());
+                    }
+                }
+            }
+            else{
+                throw new Exception("Borrower can not find books checked out by other users.");
+            }
+        }
+        if(isStaff(staffName)){
+            for(CheckOut checkout: checkouts){
+                if(checkout.getBorrower().getName().equals(borrowName)){
+                    borrowedBooks.add(checkout.getBookCopy());
+                }
+            }
+        }
+        else{
+            throw new Exception("The User doesn't exist.");
+        }
+
+        for(BookCopy copy: borrowedBooks){
+            System.out.println(String.format("ID: %d Author: %s Subject: %s",copy.getId(),copy.getAuthor(),copy.getSubject()));
+        }
+        return borrowedBooks;
     }
 
     // + findOutLastBorrower(bookCopyId: int, staffName: String): Borrower
     public Borrower findOutLastBorrower(int bookCopyId, String staffName) throws Exception {
-        return null;
+        BookCopy copy = getBookCopyById(bookCopyId);
+        if(isStaff(staffName)){
+            if(copy == null){
+                throw new Exception("the bookCopyId is not found.");
+            }
+            if(copy.getBorrowHistory().size() == 0){
+                System.out.println();
+                return null;
+            }
+            else{
+                Borrower borrower = copy.getBorrowHistory().get(copy.getBorrowHistory().size()-1);
+                System.out.println(String.format("User: %s",borrower.getName()));
+                return borrower;
+            }
+            
+        }
+        else if(isBorrower(staffName)){
+            throw new Exception("Borrower can not find borrower.");
+        }
+        else{
+            throw new Exception("The user name is not found.");
+        }
     }
 
     // - isStaff(userName: String): boolean
     private boolean isStaff(String userName) {
         // TODO
-        return true;
+        for(User user: users){
+            if(user.getName().equals(userName)){
+                if(user.getClass().getSimpleName().equals("Staff")){
+                    return true;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        return false;
     }
 
     // - isBorrower(userName: String): boolean
     private boolean isBorrower(String userName) {
         // TODO
-        return true;
+        for(User user: users){
+            if(user.getName().equals(userName)){
+                if(user.getClass().getSimpleName().equals("Borrower")){
+                    return true;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        return false;
     }
 };
