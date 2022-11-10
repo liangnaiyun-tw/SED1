@@ -152,6 +152,70 @@ public class LibrarySystem {
         }
     }
 
+    private static void parseCommandReturn(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+        String staffName = inputTokens[0];
+        int bookId = Integer.parseInt(inputTokens[2]);
+        if (bookId < 0) {
+            throw new Exception("Error");
+        }
+
+        try {
+            system.removeBook(bookId, staffName);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void parseCommandListAuthor(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+        String author = inputTokens[2];
+        
+        try {
+            system.queryByAuthor(author);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void parseCommandListSubject(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+        String subject = inputTokens[2];
+
+        try {
+            system.queryBySubject(subject);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void parseCommandFindChecked(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+        String staff = inputTokens[0];
+        String borrower = inputTokens[2];
+
+        try {
+            system.findOutCheckBooks(staff, borrower);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void parseCommandBorrower(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+        String staff = inputTokens[0];
+        int bookId = Integer.parseInt(inputTokens[2]);
+        if (bookId < 0) {
+            throw new Exception("Error");
+        }
+
+        try {
+            system.findOutLastBorrower(bookId, staff);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         if (args.length != 1) {
             System.out.println("Input Error");
@@ -170,11 +234,26 @@ public class LibrarySystem {
                     if (inputTokens.length == 2 && inputTokens[1].equals("addBook")) {
                         parseCommandAddBook(librarySystem, inputTokens[0], inputFile);
                     }
-                    else if (inputTokens.length == 3 && inputTokens.equals("removeBook")) {
-                        parseCommandRemoveBook(librarySystem, inputTokens)
+                    else if (inputTokens.length == 3 && inputTokens[1].equals("removeBook")) {
+                        parseCommandRemoveBook(librarySystem, inputTokens);
                     }
-                    else if (inputTokens.length == 3 && inputTokens.equals("checkout")) {
+                    else if (inputTokens.length == 3 && inputTokens[1].equals("checkout")) {
                         parseCommandCheckOut(librarySystem, inputTokens[0], inputTokens[2], inputFile);
+                    }
+                    else if (inputTokens.length == 3 && inputTokens[1].equals("return")) {
+                        parseCommandReturn(librarySystem, inputTokens);
+                    }
+                    else if (inputTokens.length == 3 && inputTokens[1].equals("listAuthor")) {
+                        parseCommandListAuthor(librarySystem, inputTokens);
+                    }
+                    else if (inputTokens.length == 3 && inputTokens[1].equals("listSubject")) {
+                        parseCommandListSubject(librarySystem, inputTokens);
+                    }
+                    else if (inputTokens.length == 3 && inputTokens[1].equals("findChecked")) {
+                        parseCommandFindChecked(librarySystem, inputTokens);
+                    }
+                    else if (inputTokens.length == 3 && inputTokens[1].equals("Borrower")) {
+                        parseCommandBorrower(librarySystem, inputTokens);
                     }
                     else {
                         throw new Exception("Error");
