@@ -176,7 +176,6 @@ public class SmallLibrarySystem {
 
         // remove the book
         this.bookCopies.remove(bookToRemove);
-        SmallLibrarySystem.bookCopyCount--;
     }
 
     // + queryByAuthor(author: Author): List<BookCopy>
