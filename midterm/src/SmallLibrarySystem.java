@@ -102,14 +102,17 @@ public class SmallLibrarySystem {
         }
 
         bookCopyIds.forEach(bId -> {
-            CheckOut checkOut = new CheckOut();
-            BookCopy bookCopy = getBookCopyById(bId);
-            checkOut.setBookCopy(bookCopy);
             User user = getUserByName(borrowName);
             Borrower b = (Borrower) user;
+            BookCopy bookCopy = getBookCopyById(bId);
+
+            CheckOut checkOut = new CheckOut();
+            checkOut.setBookCopy(bookCopy);
             checkOut.setBorrower(b);
             checkouts.add(checkOut);
+
             bookCopy.addBorrowHistory(b);
+            bookCopy.setStatus(Status.CHECKEDOUT);
         });
 
     }
@@ -134,17 +137,18 @@ public class SmallLibrarySystem {
             throw new Exception("Error");
         }
 
-        // checkout
-        if (bookCopy.getStatus().equals(Status.CHECKEDOUT)) {
-            bookCopy.setStatus(Status.AVAILABLEFORCHECKOUT);
-            checkouts.forEach(c -> {
-                if (c.getBookCopy().getId() == bookCopy.getId()) {
-                    this.checkouts.remove(c);
-                }
-            });
-        } else {
+        // check book status
+        if (bookCopy.getStatus().equals(Status.AVAILABLEFORCHECKOUT)) {
             throw new Exception("Can not return since the book isn't checked out");
         }
+
+        // checkout
+        bookCopy.setStatus(Status.AVAILABLEFORCHECKOUT);
+        checkouts.forEach(c -> {
+            if (c.getBookCopy().getId() == bookCopy.getId()) {
+                this.checkouts.remove(c);
+            }
+        });
     }
 
     // + addBook(bookCopy: BookCopy, staffName: String): void
