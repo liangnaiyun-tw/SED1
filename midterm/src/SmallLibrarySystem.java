@@ -182,7 +182,7 @@ public class SmallLibrarySystem {
     public List<BookCopy> queryByAuthor(String authorName) throws Exception {
         List<BookCopy> result = new ArrayList<>();
         for (BookCopy bookCopy : this.bookCopies) {
-            if (bookCopy.getAuthor().getName() == authorName) {
+            if (bookCopy.getAuthor().getName().equals(authorName)) {
                 result.add(bookCopy);
                 System.out.println(String.format("ID: %d Author: %s Subject: %s", bookCopy.getId(),
                         bookCopy.getAuthor(), bookCopy.getSubject()));
@@ -195,7 +195,7 @@ public class SmallLibrarySystem {
     public List<BookCopy> queryBySubject(String subjectName) throws Exception {
         List<BookCopy> result = new ArrayList<>();
         for (BookCopy bookCopy : this.bookCopies) {
-            if (bookCopy.getSubject().getName() == subjectName) {
+            if (bookCopy.getSubject().getName().equals(subjectName)) {
                 result.add(bookCopy);
                 System.out.println(String.format("ID: %d Author: %s Subject: %s", bookCopy.getId(),
                         bookCopy.getAuthor(), bookCopy.getSubject()));
@@ -297,7 +297,7 @@ public class SmallLibrarySystem {
     // - getUserByName(userName: String): User
     private User getUserByName(String userName) {
         for (User user : this.users) {
-            if (user.getName() == userName) {
+            if (user.getName().equals(userName)) {
                 return user;
             }
         }
