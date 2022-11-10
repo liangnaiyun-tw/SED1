@@ -105,8 +105,8 @@ public class SmallLibrarySystem {
         }
 
         bookCopyIds.forEach(bId -> {
-            User user = getUserByName(borrowName);
-            Borrower b = (Borrower) user;
+            User u = getUserByName(borrowName);
+            Borrower b = (Borrower) u;
             BookCopy bookCopy = getBookCopyById(bId);
 
             CheckOut checkOut = new CheckOut();
