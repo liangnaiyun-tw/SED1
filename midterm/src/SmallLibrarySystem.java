@@ -44,7 +44,7 @@ public class SmallLibrarySystem {
             throw new Exception("Error");
         } else {
             User user = getUserByName(borrowName);
-            borrower = ((Borrower)user);
+            borrower = ((Borrower) user);
         }
 
         if (!isStaff(staffName)) {
@@ -94,7 +94,7 @@ public class SmallLibrarySystem {
             CheckOut checkOut = new CheckOut();
             checkOut.setBookCopy(getBookCopyById(bId));
             User user = getUserByName(borrowName);
-            checkOut.setBorrower((Borrower)user);
+            checkOut.setBorrower((Borrower) user);
             checkouts.add(checkOut);
         });
 
@@ -118,15 +118,14 @@ public class SmallLibrarySystem {
         if (bookCopy == null) {
             throw new Exception("Error");
         } else {
-            if(bookCopy.getStatus().equals(Status.CHECKEDOUT)){
+            if (bookCopy.getStatus().equals(Status.CHECKEDOUT)) {
                 bookCopy.setStatus(Status.AVAILABLEFORCHECKOUT);
                 checkouts.forEach(c -> {
-                    if(c.getBookCopy().getId() == bookCopy.getId()){
+                    if (c.getBookCopy().getId() == bookCopy.getId()) {
                         this.checkouts.remove(c);
                     }
                 });
-            } 
-            else{
+            } else {
                 throw new Exception("Can not return since the book isn't checked out");
             }
         }
@@ -147,6 +146,7 @@ public class SmallLibrarySystem {
 
         // add book
         this.bookCopies.add(bookCopy);
+        SmallLibrarySystem.bookCopyCount++;
     }
 
     // + removeBook(bookCopyId: int, staffName: String): void
@@ -176,6 +176,7 @@ public class SmallLibrarySystem {
 
         // remove the book
         this.bookCopies.remove(bookToRemove);
+        SmallLibrarySystem.bookCopyCount--;
     }
 
     // + queryByAuthor(author: Author): List<BookCopy>
@@ -209,10 +210,10 @@ public class SmallLibrarySystem {
 
         List<BookCopy> borrowedBooks = new ArrayList<>();
 
-        if(getUserByName(staffName) == null){
+        if (getUserByName(staffName) == null) {
             throw new Exception("Error");
         }
-        if(getUserByName(borrowName) == null){
+        if (getUserByName(borrowName) == null) {
             throw new Exception("Error");
         }
 
@@ -239,7 +240,8 @@ public class SmallLibrarySystem {
 
         for (BookCopy copy : borrowedBooks) {
             System.out.println(
-                    String.format("ID: %d Author: %s Subject: %s", copy.getId(), copy.getAuthor().getName(), copy.getSubject().getName()));
+                    String.format("ID: %d Author: %s Subject: %s", copy.getId(), copy.getAuthor().getName(),
+                            copy.getSubject().getName()));
         }
         return borrowedBooks;
     }
@@ -247,7 +249,7 @@ public class SmallLibrarySystem {
     // + findOutLastBorrower(bookCopyId: int, staffName: String): Borrower
     public Borrower findOutLastBorrower(int bookCopyId, String staffName) throws Exception {
         BookCopy copy = getBookCopyById(bookCopyId);
-        if(getUserByName(staffName) == null){
+        if (getUserByName(staffName) == null) {
             throw new Exception("Error");
         }
         if (isStaff(staffName)) {
@@ -272,12 +274,11 @@ public class SmallLibrarySystem {
 
     // - isStaff(userName: String): boolean
     private boolean isStaff(String userName) {
-        for(User user: users){
-            if(user.getName().equals(userName)){
-                if(user.getClass().getSimpleName().equals("Staff")){
+        for (User user : users) {
+            if (user.getName().equals(userName)) {
+                if (user.getClass().getSimpleName().equals("Staff")) {
                     return true;
-                }
-                else{
+                } else {
                     break;
                 }
             }
@@ -287,12 +288,11 @@ public class SmallLibrarySystem {
 
     // - isBorrower(userName: String): boolean
     private boolean isBorrower(String userName) {
-        for(User user: users){
-            if(user.getName().equals(userName)){
-                if(user.getClass().getSimpleName().equals("Borrower")){
+        for (User user : users) {
+            if (user.getName().equals(userName)) {
+                if (user.getClass().getSimpleName().equals("Borrower")) {
                     return true;
-                }
-                else{
+                } else {
                     break;
                 }
             }
