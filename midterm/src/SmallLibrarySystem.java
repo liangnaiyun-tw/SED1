@@ -9,11 +9,25 @@ public class SmallLibrarySystem {
     public static int bookCopyCount;
 
     public void printState() {
-        for (BookCopy book: bookCopies) {
-            System.out.println(book.getAuthor().getName());
-            System.out.println(book.getSubject().getName());
-            System.out.println(book.getId());
+        System.out.println("Book");
+        for (BookCopy book : bookCopies) {
+            System.out.println(
+                    String.format("%s %s %d", book.getAuthor().getName(), book.getSubject().getName(), book.getId()));
         }
+
+        System.out.println("User");
+        for (User user : users) {
+            System.out.println(
+                    String.format("%s %s", (this.isStaff(user.getName()) ? "Staff" : "Borrower"), user.getName()));
+        }
+
+        System.out.println("Checkout");
+        for (CheckOut checkout : this.checkouts) {
+            System.out.println(
+                    String.format("%s %s", checkout.getBookCopy().getId(), checkout.getBorrower().getName()));
+        }
+
+        System.out.println();
     }
 
     // + System(copies: List<BookCopy>, users: List<User>)
