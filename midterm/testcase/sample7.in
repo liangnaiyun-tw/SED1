@@ -11,7 +11,7 @@ UserA removeBook 3
 UserA checkout UserB
 0 1
 UserA return 0
-UserA findBorrower 5
-UserB findBorrower 1
-UserC findBorrower 1
-UserA findBorrower 1
+UserA Borrower 5
+UserB Borrower 1
+UserC Borrower 1
+UserA Borrower 1
