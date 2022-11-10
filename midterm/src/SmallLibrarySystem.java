@@ -78,6 +78,11 @@ public class SmallLibrarySystem {
             throw new Exception("Error");
         }
 
+        // check if bookCopsyIds is null
+        if (bookCopyIds == null) {
+            return;
+        }
+
         // check bookCopy exists
         for (Integer bookId : bookCopyIds) {
             BookCopy bookCopy = this.getBookCopyById(bookId);
@@ -256,8 +261,7 @@ public class SmallLibrarySystem {
             } else {
                 throw new Exception("Borrower can not find books checked out by other users");
             }
-        }
-        else if (isStaff(staffName)) {
+        } else if (isStaff(staffName)) {
             for (CheckOut checkout : checkouts) {
                 if (checkout.getBorrower().getName().equals(borrowName)) {
                     borrowedBooks.add(checkout.getBookCopy());
