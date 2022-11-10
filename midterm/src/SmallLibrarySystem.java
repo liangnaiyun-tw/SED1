@@ -103,42 +103,47 @@ public class SmallLibrarySystem {
 
         bookCopyIds.forEach(bId -> {
             CheckOut checkOut = new CheckOut();
-            checkOut.setBookCopy(getBookCopyById(bId));
+            BookCopy bookCopy = getBookCopyById(bId);
+            checkOut.setBookCopy(bookCopy);
             User user = getUserByName(borrowName);
-            checkOut.setBorrower((Borrower) user);
+            Borrower b = (Borrower) user;
+            checkOut.setBorrower(b);
             checkouts.add(checkOut);
+            bookCopy.addBorrowHistory(b);
         });
 
     }
 
     // + returnBook(bookCopyId: int, staffName: String): void
     public void returnBook(int bookCopyId, String staffName) throws Exception {
-        User staff = null;
+        User staff = getUserByName(staffName);
 
-        if (getUserByName(staffName) == null) {
+        // check if the user exists
+        if (staff == null) {
             throw new Exception("Error");
-        } else {
-            staff = getUserByName(staffName);
         }
 
+        // check if the user is a staff
         if (!isStaff(staffName)) {
             throw new Exception("Borrower can not return book");
         }
 
         BookCopy bookCopy = getBookCopyById(bookCopyId);
+        // check if the book exists
         if (bookCopy == null) {
             throw new Exception("Error");
+        }
+
+        // checkout
+        if (bookCopy.getStatus().equals(Status.CHECKEDOUT)) {
+            bookCopy.setStatus(Status.AVAILABLEFORCHECKOUT);
+            checkouts.forEach(c -> {
+                if (c.getBookCopy().getId() == bookCopy.getId()) {
+                    this.checkouts.remove(c);
+                }
+            });
         } else {
-            if (bookCopy.getStatus().equals(Status.CHECKEDOUT)) {
-                bookCopy.setStatus(Status.AVAILABLEFORCHECKOUT);
-                checkouts.forEach(c -> {
-                    if (c.getBookCopy().getId() == bookCopy.getId()) {
-                        this.checkouts.remove(c);
-                    }
-                });
-            } else {
-                throw new Exception("Can not return since the book isn't checked out");
-            }
+            throw new Exception("Can not return since the book isn't checked out");
         }
     }
 
