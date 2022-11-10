@@ -150,27 +150,29 @@ public class LibrarySystem {
         }
 
         try {
-            system.removeBook(bookId, staffName);
+            system.returnBook(bookId, staffName);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
     private static void parseCommandListAuthor(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+        String staff = inputTokens[0];
         String author = inputTokens[2];
 
         try {
-            system.queryByAuthor(author);
+            system.queryByAuthor(staff, author);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
     private static void parseCommandListSubject(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+        String staff = inputTokens[0];
         String subject = inputTokens[2];
 
         try {
-            system.queryBySubject(subject);
+            system.queryBySubject(staff, subject);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -235,6 +237,8 @@ public class LibrarySystem {
                     } else {
                         throw new Exception("Error");
                     }
+                    // System.out.println(inputLine);
+                    // librarySystem.printState();
                 } catch (Exception e) {
                     System.out.println("Error");
                 }
