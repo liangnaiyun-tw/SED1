@@ -144,11 +144,12 @@ public class SmallLibrarySystem {
 
         // checkout
         bookCopy.setStatus(Status.AVAILABLEFORCHECKOUT);
-        checkouts.forEach(c -> {
-            if (c.getBookCopy().getId() == bookCopy.getId()) {
-                this.checkouts.remove(c);
+        for (CheckOut checkOut : this.checkouts) {
+            if (checkOut.getBookCopy().getId() == bookCopyId) {
+                this.checkouts.remove(checkOut);
+                break;
             }
-        });
+        }
     }
 
     // + addBook(bookCopy: BookCopy, staffName: String): void
