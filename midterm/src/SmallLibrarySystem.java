@@ -31,7 +31,7 @@ public class SmallLibrarySystem {
     // + checkOut(bookCopyIds: List<Integer>, staffName: String, borrowerName:
     // String): void
     public void checkOut(List<Integer> bookCopyIds, String staffName, String borrowName) throws Exception {
-        Staff staff = null;
+        User staff = null;
         Borrower borrower = null;
 
         if (getUserByName(staffName) == null) {
@@ -40,10 +40,11 @@ public class SmallLibrarySystem {
             staff = getUserByName(staffName);
         }
 
-        if (getUserByName(borrower) == null) {
+        if (getUserByName(borrowName) == null) {
             throw new Exception("Error");
         } else {
-            borrower = getUserByName(borrower);
+            User user = getUserByName(borrowName);
+            borrower = ((Borrower)user);
         }
 
         if (!isStaff(staffName)) {
@@ -92,7 +93,8 @@ public class SmallLibrarySystem {
         bookCopyIds.forEach(bId -> {
             CheckOut checkOut = new CheckOut();
             checkOut.setBookCopy(getBookCopyById(bId));
-            checkOut.setBorrower(borrower);
+            User user = getUserByName(borrowName);
+            checkOut.setBorrower((Borrower)user);
             checkouts.add(checkOut);
         });
 
@@ -100,7 +102,7 @@ public class SmallLibrarySystem {
 
     // + returnBook(bookCopyId: int, staffName: String): void
     public void returnBook(int bookCopyId, String staffName) throws Exception {
-        Staff staff = null;
+        User staff = null;
 
         if (getUserByName(staffName) == null) {
             throw new Exception("Error");
