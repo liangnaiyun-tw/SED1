@@ -251,6 +251,10 @@ public class SmallLibrarySystem {
             throw new Exception("Error");
         }
 
+        if (isStaff(borrowName)) {
+            throw new Exception("Error");
+        }
+
         if (isBorrower(staffName)) {
             if (staffName.equals(borrowName)) {
                 for (CheckOut checkout : checkouts) {
