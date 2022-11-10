@@ -172,7 +172,6 @@ public class SmallLibrarySystem {
 
     // - isStaff(userName: String): boolean
     private boolean isStaff(String userName) {
-        // TODO
         for(User user: users){
             if(user.getName().equals(userName)){
                 if(user.getClass().getSimpleName().equals("Staff")){
@@ -188,7 +187,6 @@ public class SmallLibrarySystem {
 
     // - isBorrower(userName: String): boolean
     private boolean isBorrower(String userName) {
-        // TODO
         for(User user: users){
             if(user.getName().equals(userName)){
                 if(user.getClass().getSimpleName().equals("Borrower")){
