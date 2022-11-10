@@ -8,6 +8,14 @@ public class SmallLibrarySystem {
     private List<CheckOut> checkouts;
     public static int bookCopyCount;
 
+    public void printState() {
+        for (BookCopy book: bookCopies) {
+            System.out.println(book.getAuthor().getName());
+            System.out.println(book.getSubject().getName());
+            System.out.println(book.getId());
+        }
+    }
+
     // + System(copies: List<BookCopy>, users: List<User>)
     SmallLibrarySystem(List<BookCopy> copies, List<User> users) {
         this.bookCopies = copies;
