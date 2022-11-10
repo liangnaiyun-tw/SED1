@@ -217,7 +217,7 @@ public class LibrarySystem {
             SmallLibrarySystem librarySystem = parseInitial(inputFile);
             while ((inputLine = inputFile.readLine()) != null) {
                 try {
-                    System.out.println(inputLine);
+                    // System.out.println(inputLine);
 
                     inputTokens = inputLine.split("\\s+");
                     if (inputTokens.length == 2 && inputTokens[1].equals("addBook")) {
@@ -240,7 +240,7 @@ public class LibrarySystem {
                         throw new Exception("Error");
                     }
 
-                    librarySystem.printState();
+                    // librarySystem.printState();
                 } catch (Exception e) {
                     System.out.println("Error");
                 }
