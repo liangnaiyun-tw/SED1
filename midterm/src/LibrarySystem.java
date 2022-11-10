@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-public class Main {
+public class LibrarySystem {
     public static void main(String[] args) {
         if (args.length != 1) {
             System.out.println("Input Error");
@@ -14,11 +14,16 @@ public class Main {
         try {
             inputFile = new BufferedReader(new FileReader(args[0]));
             while ((inputLine = inputFile.readLine()) != null) {
-                inputTokens = inputLine.split("\\s+");
+                try {
+                    inputTokens = inputLine.split("\\s+");
+                }
+                catch (Exception e) {
+
+                }
             }
         }
         catch (Exception e) {
-            System.out.println("Input Error");
+            System.out.println("Error");
         }
     }
 }
