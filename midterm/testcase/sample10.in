@@ -1,0 +1,15 @@
+3
+AuthorA SubjectA
+AuthorB SubjectB
+AuthorC SubjectC
+4
+Staff UserA
+Borrower UserB 2
+Staff UserC
+Borrower UserD 4
+UserA checkout UserB
+0 1
+UserB return 1
+UserA return 2
+UserB return 7
+UserA return 7

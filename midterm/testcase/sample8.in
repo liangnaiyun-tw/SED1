@@ -1,0 +1,11 @@
+3
+AuthorA SubjectA
+AuthorB SubjectB
+AuthorC SubjectC
+4
+Staff UserA
+Borrower UserB 2
+Staff UserC
+Borrower UserD 4
+UserB addBook
+Steven Eatcandy
