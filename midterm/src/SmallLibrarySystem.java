@@ -68,16 +68,15 @@ public class SmallLibrarySystem {
         // check if the borrower exists
         if (getUserByName(borrowName) == null) {
             throw new Exception("Error");
-        } else {
-            User user = getUserByName(borrowName);
-            borrower = ((Borrower) user);
         }
 
         // check if the user is a borrower
         if (!isBorrower(borrowName)) {
             throw new Exception("Error");
         }
-
+        User user = getUserByName(borrowName);
+        borrower = ((Borrower) user);
+    
         // check if bookCopsyIds is null
         if (bookCopyIds == null) {
             return;
