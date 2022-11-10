@@ -185,7 +185,7 @@ public class SmallLibrarySystem {
             if (bookCopy.getAuthor().getName().equals(authorName)) {
                 result.add(bookCopy);
                 System.out.println(String.format("ID: %d Author: %s Subject: %s", bookCopy.getId(),
-                        bookCopy.getAuthor(), bookCopy.getSubject()));
+                        bookCopy.getAuthor().getName(), bookCopy.getSubject().getName()));
             }
         }
         return result;
@@ -198,7 +198,7 @@ public class SmallLibrarySystem {
             if (bookCopy.getSubject().getName().equals(subjectName)) {
                 result.add(bookCopy);
                 System.out.println(String.format("ID: %d Author: %s Subject: %s", bookCopy.getId(),
-                        bookCopy.getAuthor(), bookCopy.getSubject()));
+                        bookCopy.getAuthor().getName(), bookCopy.getSubject().getName()));
             }
         }
         return result;
