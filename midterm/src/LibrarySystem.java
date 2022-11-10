@@ -14,12 +14,12 @@ public class LibrarySystem {
         if (inputTokens.length != 1) {
             throw new Exception("Error");
         }
-        
+
         int numberOfBook = Integer.parseInt(inputTokens[0]);
         if (numberOfBook < 0) {
             throw new Exception("Error");
         }
-        
+
         List<BookCopy> books = new ArrayList<>();
         for (int i = 0; i < numberOfBook; ++i) {
             try {
@@ -29,8 +29,7 @@ public class LibrarySystem {
                     throw new Exception("Error");
                 }
                 books.add(new BookCopy(inputTokens[0], inputTokens[1]));
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -58,18 +57,14 @@ public class LibrarySystem {
                         throw new Exception("Error");
                     }
                     users.add(new Borrower(inputTokens[1], maxCopy));
-                }
-                else if (inputTokens.length == 2 && inputTokens[0].equals("Staff")) {
+                } else if (inputTokens.length == 2 && inputTokens[0].equals("Staff")) {
                     users.add(new Staff(inputTokens[1]));
-                }
-                else {
+                } else {
                     throw new Exception("Error");
                 }
-            }
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Error");
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         }
@@ -77,10 +72,11 @@ public class LibrarySystem {
         return new SmallLibrarySystem(books, users);
     }
 
-    private static void parseCommandAddBook(SmallLibrarySystem system, String staffName, BufferedReader inputFile) throws Exception {
+    private static void parseCommandAddBook(SmallLibrarySystem system, String staffName, BufferedReader inputFile)
+            throws Exception {
         String author;
         String subject;
-        
+
         String inputLine;
         String[] inputTokens;
         try {
@@ -91,19 +87,16 @@ public class LibrarySystem {
                 }
                 author = inputTokens[0];
                 subject = inputTokens[1];
-            }
-            else {
+            } else {
                 throw new Exception("Error");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         }
 
         try {
             system.addBook(new BookCopy(author, subject), staffName);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -111,16 +104,16 @@ public class LibrarySystem {
     private static void parseCommandRemoveBook(SmallLibrarySystem system, String[] inputTokens) throws Exception {
         int bookId = Integer.parseInt(inputTokens[2]);
         String userName = inputTokens[0];
-        
+
         try {
             system.removeBook(bookId, userName);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private static void parseCommandCheckOut(SmallLibrarySystem system, String staffName, String borrower, BufferedReader inputFile) throws Exception {
+    private static void parseCommandCheckOut(SmallLibrarySystem system, String staffName, String borrower,
+            BufferedReader inputFile) throws Exception {
         List<Integer> bookIds = new ArrayList<>();
 
         String inputLine;
@@ -135,19 +128,16 @@ public class LibrarySystem {
                     }
                     bookIds.add(Integer.parseInt(inputTokens[i]));
                 }
-            }
-            else {
+            } else {
                 throw new Exception("Error");
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw e;
         }
 
         try {
             system.checkOut(bookIds, staffName, borrower);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -161,19 +151,17 @@ public class LibrarySystem {
 
         try {
             system.removeBook(bookId, staffName);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
     private static void parseCommandListAuthor(SmallLibrarySystem system, String[] inputTokens) throws Exception {
         String author = inputTokens[2];
-        
+
         try {
             system.queryByAuthor(author);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -183,8 +171,7 @@ public class LibrarySystem {
 
         try {
             system.queryBySubject(subject);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -195,8 +182,7 @@ public class LibrarySystem {
 
         try {
             system.findOutCheckBooks(staff, borrower);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -210,8 +196,7 @@ public class LibrarySystem {
 
         try {
             system.findOutLastBorrower(bookId, staff);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -233,38 +218,28 @@ public class LibrarySystem {
                     inputTokens = inputLine.split("\\s+");
                     if (inputTokens.length == 2 && inputTokens[1].equals("addBook")) {
                         parseCommandAddBook(librarySystem, inputTokens[0], inputFile);
-                    }
-                    else if (inputTokens.length == 3 && inputTokens[1].equals("removeBook")) {
+                    } else if (inputTokens.length == 3 && inputTokens[1].equals("removeBook")) {
                         parseCommandRemoveBook(librarySystem, inputTokens);
-                    }
-                    else if (inputTokens.length == 3 && inputTokens[1].equals("checkout")) {
+                    } else if (inputTokens.length == 3 && inputTokens[1].equals("checkout")) {
                         parseCommandCheckOut(librarySystem, inputTokens[0], inputTokens[2], inputFile);
-                    }
-                    else if (inputTokens.length == 3 && inputTokens[1].equals("return")) {
+                    } else if (inputTokens.length == 3 && inputTokens[1].equals("return")) {
                         parseCommandReturn(librarySystem, inputTokens);
-                    }
-                    else if (inputTokens.length == 3 && inputTokens[1].equals("listAuthor")) {
+                    } else if (inputTokens.length == 3 && inputTokens[1].equals("listAuthor")) {
                         parseCommandListAuthor(librarySystem, inputTokens);
-                    }
-                    else if (inputTokens.length == 3 && inputTokens[1].equals("listSubject")) {
+                    } else if (inputTokens.length == 3 && inputTokens[1].equals("listSubject")) {
                         parseCommandListSubject(librarySystem, inputTokens);
-                    }
-                    else if (inputTokens.length == 3 && inputTokens[1].equals("findChecked")) {
+                    } else if (inputTokens.length == 3 && inputTokens[1].equals("findChecked")) {
                         parseCommandFindChecked(librarySystem, inputTokens);
-                    }
-                    else if (inputTokens.length == 3 && inputTokens[1].equals("Borrower")) {
+                    } else if (inputTokens.length == 3 && inputTokens[1].equals("Borrower")) {
                         parseCommandBorrower(librarySystem, inputTokens);
-                    }
-                    else {
+                    } else {
                         throw new Exception("Error");
                     }
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     System.out.println("Error");
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error");
         }
     }
