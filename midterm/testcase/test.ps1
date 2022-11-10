@@ -8,7 +8,7 @@ powershell /c "rm ..$($codeFolder)\*.class"
 Write-Output "Compile java files..."
 powershell /c "javac ..$($codeFolder)\*.java"
 
-$sampleInputs = Get-ChildItem -Name | Select-String -Pattern "sample*"
+$sampleInputs = Get-ChildItem -Name | Select-String -Pattern "sample*.in"
 foreach($sampleInput in $sampleInputs) {
     [string] $sampleInput = $sampleInput
     $length = $sampleInput.length
