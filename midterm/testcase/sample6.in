@@ -14,4 +14,3 @@ UserA return 0
 UserA listAuthor AuthorE
 UserC listAuthor AuthorA
 UserA listAuthor AuthorA
-

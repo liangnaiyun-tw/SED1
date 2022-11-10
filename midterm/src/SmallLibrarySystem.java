@@ -257,7 +257,7 @@ public class SmallLibrarySystem {
                 throw new Exception("Borrower can not find books checked out by other users");
             }
         }
-        if (isStaff(staffName)) {
+        else if (isStaff(staffName)) {
             for (CheckOut checkout : checkouts) {
                 if (checkout.getBorrower().getName().equals(borrowName)) {
                     borrowedBooks.add(checkout.getBookCopy());
@@ -348,4 +348,4 @@ public class SmallLibrarySystem {
         }
         return null;
     }
-};
+}
