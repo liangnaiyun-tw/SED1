@@ -8,13 +8,13 @@ public class BookCopy {
     private int id;
     private List<Borrower> borrowHistory;
 
-    public BookCopy(Author author, Subject subject) {
-        this.author = author;
-        this.subject = subject;
+    public BookCopy(String authorName, String subjectName) {
+        this.author = new Author(authorName);
+        this.subject = new Subject(subjectName);
         this.status = Status.AVAILABLEFORCHECKOUT;
-        this.id = LibrarySystem.bookCopyCount;
-        LibrarySystem.bookCopyCount++;
-        borrowHistory = new ArrayList<Borrower>;
+        this.id = SmallLibrarySystem.bookCopyCount;
+        SmallLibrarySystem.bookCopyCount++;
+        borrowHistory = new ArrayList<Borrower>();
     }
 
     public void addBorrowHistory(Borrower borrower){
