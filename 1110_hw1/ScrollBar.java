@@ -1,7 +1,8 @@
-public class ScrollBar extends Element{
-    static String name = "scrollBar";
+public class ScrollBar extends Element {
 
-    public String getName() {
-        return name;
-    }
+  static String name = "scrollBar";
+
+  public String getName() {
+    return name;
+  }
 }

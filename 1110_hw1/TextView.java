@@ -1,18 +1,18 @@
-public class TextView extends View{
+public class TextView extends View {
 
-    private String text;
+  private String text;
 
-    public TextView(String name,String text) {
-        super(name);
-        this.text = text;
+  public TextView(String name, String text) {
+    super(name);
+    this.text = text;
+  }
+
+  @Override
+  void display() {
+    System.out.print(text);
+    for (Element element : elements) {
+      System.out.print(" " + element.getName());
     }
-
-    @Override
-    void display() {
-        System.out.print(text);
-        for(Element element: elements){
-            System.out.print(" " + element.getName());
-        }
-        System.out.println();
-    }
+    System.out.println();
+  }
 }
