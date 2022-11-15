@@ -72,8 +72,8 @@ public class LibrarySystem {
         return new SmallLibrarySystem(books, users);
     }
 
-    private static void parseCommandAddBook(SmallLibrarySystem system, String staffName, BufferedReader inputFile)
-            throws Exception {
+    private static void parseCommandAddBook(SmallLibrarySystem system, String staffName,
+            BufferedReader inputFile) throws Exception {
         String author;
         String subject;
 
@@ -101,7 +101,8 @@ public class LibrarySystem {
         }
     }
 
-    private static void parseCommandRemoveBook(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+    private static void parseCommandRemoveBook(SmallLibrarySystem system, String[] inputTokens)
+            throws Exception {
         int bookId = Integer.parseInt(inputTokens[2]);
         String userName = inputTokens[0];
 
@@ -112,14 +113,13 @@ public class LibrarySystem {
         }
     }
 
-    private static void parseCommandCheckOut(SmallLibrarySystem system, String staffName, String borrower,
-            BufferedReader inputFile) throws Exception {
+    private static void parseCommandCheckOut(SmallLibrarySystem system, String staffName,
+            String borrower, BufferedReader inputFile) throws Exception {
         List<Integer> bookIds = new ArrayList<>();
 
         try {
             system.checkOut(null, staffName, borrower);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
         }
@@ -150,7 +150,8 @@ public class LibrarySystem {
         }
     }
 
-    private static void parseCommandReturn(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+    private static void parseCommandReturn(SmallLibrarySystem system, String[] inputTokens)
+            throws Exception {
         String staffName = inputTokens[0];
         int bookId = Integer.parseInt(inputTokens[2]);
         if (bookId < 0) {
@@ -164,7 +165,8 @@ public class LibrarySystem {
         }
     }
 
-    private static void parseCommandListAuthor(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+    private static void parseCommandListAuthor(SmallLibrarySystem system, String[] inputTokens)
+            throws Exception {
         String staff = inputTokens[0];
         String author = inputTokens[2];
 
@@ -175,7 +177,8 @@ public class LibrarySystem {
         }
     }
 
-    private static void parseCommandListSubject(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+    private static void parseCommandListSubject(SmallLibrarySystem system, String[] inputTokens)
+            throws Exception {
         String staff = inputTokens[0];
         String subject = inputTokens[2];
 
@@ -186,7 +189,8 @@ public class LibrarySystem {
         }
     }
 
-    private static void parseCommandFindChecked(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+    private static void parseCommandFindChecked(SmallLibrarySystem system, String[] inputTokens)
+            throws Exception {
         String staff = inputTokens[0];
         String borrower = inputTokens[2];
 
@@ -197,7 +201,8 @@ public class LibrarySystem {
         }
     }
 
-    private static void parseCommandBorrower(SmallLibrarySystem system, String[] inputTokens) throws Exception {
+    private static void parseCommandBorrower(SmallLibrarySystem system, String[] inputTokens)
+            throws Exception {
         String staff = inputTokens[0];
         int bookId = Integer.parseInt(inputTokens[2]);
         if (bookId < 0) {
@@ -233,7 +238,8 @@ public class LibrarySystem {
                     } else if (inputTokens.length == 3 && inputTokens[1].equals("removeBook")) {
                         parseCommandRemoveBook(librarySystem, inputTokens);
                     } else if (inputTokens.length == 3 && inputTokens[1].equals("checkout")) {
-                        parseCommandCheckOut(librarySystem, inputTokens[0], inputTokens[2], inputFile);
+                        parseCommandCheckOut(librarySystem, inputTokens[0], inputTokens[2],
+                                inputFile);
                     } else if (inputTokens.length == 3 && inputTokens[1].equals("return")) {
                         parseCommandReturn(librarySystem, inputTokens);
                     } else if (inputTokens.length == 3 && inputTokens[1].equals("listAuthor")) {

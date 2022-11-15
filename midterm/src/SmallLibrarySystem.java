@@ -10,20 +10,20 @@ public class SmallLibrarySystem {
     public void printState() {
         System.out.println("Book");
         for (BookCopy book : bookCopies) {
-            System.out.println(
-                    String.format("%s %s %d", book.getAuthor().getName(), book.getSubject().getName(), book.getId()));
+            System.out.println(String.format("%s %s %d", book.getAuthor().getName(),
+                    book.getSubject().getName(), book.getId()));
         }
 
         System.out.println("User");
         for (User user : users) {
-            System.out.println(
-                    String.format("%s %s", (this.isStaff(user.getName()) ? "Staff" : "Borrower"), user.getName()));
+            System.out.println(String.format("%s %s",
+                    (this.isStaff(user.getName()) ? "Staff" : "Borrower"), user.getName()));
         }
 
         System.out.println("Checkout");
         for (CheckOut checkout : this.checkouts) {
-            System.out.println(
-                    String.format("%s %s", checkout.getBookCopy().getId(), checkout.getBorrower().getName()));
+            System.out.println(String.format("%s %s", checkout.getBookCopy().getId(),
+                    checkout.getBorrower().getName()));
         }
 
         System.out.println();
@@ -51,7 +51,8 @@ public class SmallLibrarySystem {
 
     // + checkOut(bookCopyIds: List<Integer>, staffName: String, borrowerName:
     // String): void
-    public void checkOut(List<Integer> bookCopyIds, String staffName, String borrowName) throws Exception {
+    public void checkOut(List<Integer> bookCopyIds, String staffName, String borrowName)
+            throws Exception {
         User staff = getUserByName(staffName);
         Borrower borrower = null;
 
@@ -76,7 +77,7 @@ public class SmallLibrarySystem {
         }
         User user = getUserByName(borrowName);
         borrower = ((Borrower) user);
-    
+
         // check if bookCopsyIds is null
         if (bookCopyIds == null) {
             return;
@@ -275,9 +276,8 @@ public class SmallLibrarySystem {
         }
 
         for (BookCopy copy : borrowedBooks) {
-            System.out.println(
-                    String.format("ID: %d Author: %s Subject: %s", copy.getId(), copy.getAuthor().getName(),
-                            copy.getSubject().getName()));
+            System.out.println(String.format("ID: %d Author: %s Subject: %s", copy.getId(),
+                    copy.getAuthor().getName(), copy.getSubject().getName()));
         }
         return borrowedBooks;
     }
