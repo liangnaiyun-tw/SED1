@@ -1,12 +1,13 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class Main {
 
   static BufferedReader inputBuffer;
 
   private static void parseCommandAddComponent(Composition composition, String[] inputTokens)
-      throws Exception {
+      throws IOException {
     int id;
     int naturalSize;
     int shrinkability;
@@ -19,52 +20,50 @@ public class Main {
     stretchability = Integer.parseInt(inputTokens[4]);
     content = inputTokens[5];
     if (naturalSize <= 0) {
-      throw new Exception("The size of a component should be a positive integer.");
+      throw new IOException("The size of a component should be a positive integer.");
     }
     if (shrinkability <= 0) {
-      throw new Exception("The shrinkability of a component should be a positive integer.");
+      throw new IOException("The shrinkability of a component should be a positive integer.");
     }
     if (stretchability <= 0) {
-      throw new Exception("The stretchability of a component should be a positie integer.");
+      throw new IOException("The stretchability of a component should be a positie integer.");
     }
     if (stretchability < shrinkability) {
-      throw new Exception("Stretchability should be greater or equal to shrinkability.");
+      throw new IOException("Stretchability should be greater or equal to shrinkability.");
     }
     if (naturalSize < shrinkability || stretchability < naturalSize) {
-      throw new Exception(
+      throw new IOException(
           "The natural size should be in the range between shrinkability and stretchability.");
     }
 
     if (inputTokens[0].equals("Text")) {
-      composition.addComponent(
-          new TextElement(id, content, naturalSize, stretchability, shrinkability));
+      composition
+          .addComponent(new TextElement(id, content, naturalSize, stretchability, shrinkability));
     } else if (inputTokens[0].equals("GraphicalElement")) {
       composition.addComponent(
           new GraphicalElement(id, content, naturalSize, stretchability, shrinkability));
     } else {
-      throw new Exception("No matched element found.");
+      throw new IOException("No matched element found.");
     }
   }
 
   private static void parseCommandChangeComponentSize(Composition composition, String[] inputTokens)
-      throws Exception {
+      throws IOException {
     int id;
     int newSize;
 
     id = Integer.parseInt(inputTokens[1]);
     newSize = Integer.parseInt(inputTokens[2]);
     if (newSize <= 0) {
-      throw new Exception("The new size should be a positive integer.");
+      throw new IOException("The new size should be a positive integer.");
     }
 
-    composition.getComponents()
-        .stream().filter(component -> component.getId() == id)
-        .findFirst().orElseThrow(() -> new Exception("No matched id found."))
-        .changeSize(newSize);
+    composition.getComponents().stream().filter(component -> component.getId() == id).findFirst()
+        .orElseThrow(() -> new IOException("No matched id found.")).changeSize(newSize);
   }
 
   private static void parseCommandRequireLayout(Composition composition, String[] inputTokens)
-      throws Exception {
+      throws IOException {
     String strategy;
 
     strategy = inputTokens[1];
@@ -75,7 +74,7 @@ public class Main {
     } else if (strategy.equals("ArrayComposition")) {
       composition.compose(new ArrayStrategy());
     } else {
-      throw new Exception("No matched linebreaking strategy.");
+      throw new IOException("No matched linebreaking strategy.");
     }
   }
 
@@ -94,8 +93,8 @@ public class Main {
       while ((inputLine = inputBuffer.readLine()) != null) {
         try {
           inputTokens = inputLine.split("\\s+");
-          if (inputTokens.length == 6 &&
-              (inputTokens[0].equals("Text") || inputTokens[0].equals("GraphicalElement"))) {
+          if (inputTokens.length == 6
+              && (inputTokens[0].equals("Text") || inputTokens[0].equals("GraphicalElement"))) {
 
             parseCommandAddComponent(composition, inputTokens);
           } else if (inputTokens.length == 3 && inputTokens[0].equals("ChangeSize")) {
@@ -103,7 +102,7 @@ public class Main {
           } else if (inputTokens.length == 2 && inputTokens[0].equals("Require")) {
             parseCommandRequireLayout(composition, inputTokens);
           } else {
-            throw new Exception("No command matched");
+            throw new IOException("No command matched");
           }
         } catch (Exception inputError) {
           System.out.println("Input Error");
