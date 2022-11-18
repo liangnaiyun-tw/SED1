@@ -1,3 +1,4 @@
 public interface LinebreakingStrategy {
-    void arrange(Composition composition);
+
+  void arrange(Composition composition);
 }

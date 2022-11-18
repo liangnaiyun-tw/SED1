@@ -1,8 +1,9 @@
-public class ThickBlackBorder extends Element{
-    static String name = "thickBlackBorder";
+public class ThickBlackBorder extends Element {
 
-    public String getName() {
-        return name;
-    }
+  static String name = "thickBlackBorder";
+
+  public String getName() {
+    return name;
+  }
 }
 

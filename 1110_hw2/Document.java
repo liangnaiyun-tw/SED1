@@ -1,3 +1,4 @@
 public interface Document {
-    public void present();
+
+  public void present();
 }

@@ -1,22 +1,23 @@
 public abstract class Presentation {
-    
-    private SpreadsheetApplication spreadsheetApplication;
 
-    public Presentation(SpreadsheetApplication spreadsheetApplication){
-        this.setSpreadsheetApplication(spreadsheetApplication);
-    }
+  private SpreadsheetApplication spreadsheetApplication;
 
-    public SpreadsheetApplication getSpreadsheetApplication(){
-        return this.spreadsheetApplication;
-    }
+  public Presentation(SpreadsheetApplication spreadsheetApplication) {
+    this.setSpreadsheetApplication(spreadsheetApplication);
+  }
 
-    public void setSpreadsheetApplication(SpreadsheetApplication spreadsheetApplication){
-        this.spreadsheetApplication = spreadsheetApplication;
-    }
+  public SpreadsheetApplication getSpreadsheetApplication() {
+    return this.spreadsheetApplication;
+  }
 
-    public abstract void depict();
+  public void setSpreadsheetApplication(SpreadsheetApplication spreadsheetApplication) {
+    this.spreadsheetApplication = spreadsheetApplication;
+  }
 
-    public void change(String newItem, int newValue){
-        this.spreadsheetApplication.update(newItem, newValue);
-    };
+  public abstract void depict();
+
+  public void change(String newItem, int newValue) {
+    this.spreadsheetApplication.update(newItem, newValue);
+  }
+
 }
