@@ -30,7 +30,7 @@ public class Main {
                 gui.addWidget(new Button(inputTokens[1]));
                 break;
               default:
-                throw new Exception();
+                throw new IllegalArgumentException();
             }
           } else if (inputTokens.length == 1 && inputTokens[0].equals("Present")) {
             gui.display();
@@ -39,7 +39,7 @@ public class Main {
           } else if (inputTokens.length == 1 && inputTokens[0].equals("Motif")) {
             gui.setStyle(new Motif());
           } else {
-            throw new Exception();
+            throw new IllegalArgumentException();
           }
 
         } catch (Exception inputError) {
