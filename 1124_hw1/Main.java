@@ -29,6 +29,8 @@ public class Main {
               case "Button":
                 gui.addWidget(new Button(inputTokens[1]));
                 break;
+              default:
+                throw new Exception();
             }
           } else if (inputTokens.length == 1 && inputTokens[0].equals("Present")) {
             gui.display();
@@ -37,7 +39,7 @@ public class Main {
           } else if (inputTokens.length == 1 && inputTokens[0].equals("Motif")) {
             gui.setStyle(new Motif());
           } else {
-            throw new Exception("Invalid command format!");
+            throw new Exception();
           }
 
         } catch (Exception inputError) {
