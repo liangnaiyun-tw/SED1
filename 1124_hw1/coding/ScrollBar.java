@@ -1,3 +1,5 @@
+package coding;
+
 public class ScrollBar extends Widget {
 
   public ScrollBar(String name) {

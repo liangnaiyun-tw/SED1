@@ -1,3 +1,5 @@
+package coding;
+
 public class Button extends Widget {
 
   public Button(String name) {
