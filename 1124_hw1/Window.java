@@ -1,5 +1,3 @@
-package coding;
-
 public class Window extends Widget {
 
   public Window(String name) {

@@ -1,5 +1,3 @@
-package coding;
-
 public interface Style {
 
   public void displayWindow(String elementName);

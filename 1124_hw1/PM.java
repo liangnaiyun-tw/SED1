@@ -1,5 +1,3 @@
-package coding;
-
 public class PM implements Style {
 
   public void displayWindow(String elementName) {

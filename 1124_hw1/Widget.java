@@ -1,5 +1,3 @@
-package coding;
-
 abstract class Widget implements Comparable<Widget> {
 
   private Style style = new Motif();
