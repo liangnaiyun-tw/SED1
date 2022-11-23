@@ -5,7 +5,6 @@ import java.io.IOException;
 public class Main {
 
     static BufferedReader inputBuffer;
-    static Reader reader;
 
     public static void main(String[] args) {
         if (args.length != 1) {
@@ -17,6 +16,7 @@ public class Main {
             String format;
             String content;
             Converter converter;
+            Reader reader = new Reader();
 
             inputBuffer = new BufferedReader(new FileReader(args[0]));
             while ((format = inputBuffer.readLine()) != null) {
@@ -29,7 +29,7 @@ public class Main {
                     } else {
                         throw new IllegalArgumentException("Invalid text format");
                     }
-                    System.out.println(converter.convert(new RTFDocument(content)));
+                    System.out.println(reader.convert(converter, new RTFDocument(content)));
                 } catch (IllegalArgumentException inputError) {
                     System.out.println("Input Error");
                 }
