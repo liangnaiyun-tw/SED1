@@ -1,0 +1,22 @@
+Create abc SkipList
+Add abc a
+Add abc b
+Length abc
+Size abc
+Add abc c
+Get abc 0
+GetNode abc 0
+PrintOutList abc
+Create list List
+Add list a
+Add list b
+Length list
+Size list
+Add list c
+Get list 0
+GetNode list 0
+PrintOutList list
+Add list d
+PrintOutList list
+GetNode list 3
+Get list 3
