@@ -7,6 +7,22 @@ public class Main {
 
   static BufferedReader inputBuffer;
 
+  public static void drawCloseBox(Window window) throws Exception {
+    if (window instanceof TransientWindow) {
+      ((TransientWindow) window).drawCloseBox();
+    } else {
+      throw new Exception();
+    }
+  }
+
+  public static void drawBorder(Window window) throws Exception {
+    if (window instanceof IconWindow) {
+      ((IconWindow) window).drawBorder();
+    } else {
+      throw new Exception();
+    }
+  }
+
   public static void main(String[] args) {
     if (args.length != 1) {
       System.out.println("Input Error");
@@ -30,7 +46,7 @@ public class Main {
                 case "XWindow":
                   window.setWindowImplementor(new XWindow());
                   if (inputTokens2[0].equals("drawBorder")) {
-                    window.drawBorder();
+                    drawBorder(window);
                   } else {
                     throw new IllegalArgumentException();
                   }
@@ -38,7 +54,7 @@ public class Main {
                 case "PMWindow":
                   window.setWindowImplementor(new PMWindow());
                   if (inputTokens2[0].equals("drawBorder")) {
-                    window.drawBorder();
+                    drawBorder(window);
                   } else {
                     throw new IllegalArgumentException();
                   }
@@ -53,7 +69,7 @@ public class Main {
                 case "XWindow":
                   window.setWindowImplementor(new XWindow());
                   if (inputTokens2[0].equals("drawCloseBox")) {
-                    window.drawCloseBox();
+                    drawCloseBox(window);
                   } else {
                     throw new IllegalArgumentException();
                   }
@@ -61,7 +77,7 @@ public class Main {
                 case "PMWindow":
                   window.setWindowImplementor(new PMWindow());
                   if (inputTokens2[0].equals("drawCloseBox")) {
-                    window.drawCloseBox();
+                    drawCloseBox(window);
                   } else {
                     throw new IllegalArgumentException();
                   }
@@ -75,7 +91,7 @@ public class Main {
           } else {
             throw new IllegalArgumentException();
           }
-        } catch (IllegalArgumentException inputError) {
+        } catch (Exception inputError) {
           System.out.println("Input Error");
         }
       }

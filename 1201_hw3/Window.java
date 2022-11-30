@@ -1,11 +1,10 @@
-abstract class Window {
+public class Window {
 
   protected WindowImplementor windowImplementor;
 
-  public abstract void drawBorder();
 
-  public abstract void drawCloseBox();
-
-  public abstract void setWindowImplementor(WindowImplementor windowImplementor);
+  public void setWindowImplementor(WindowImplementor windowImplementor) {
+    this.windowImplementor = windowImplementor;
+  }
 }
 
