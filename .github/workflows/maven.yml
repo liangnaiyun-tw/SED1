@@ -1,0 +1,24 @@
+name: Java auto test
+
+on:
+  push:
+    branches:
+      - auto_test_pr
+    paths:
+      - '**/1103_hw1/**'
+
+jobs:
+  build:
+    runs-on: [windows-latest]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '8'
+          distribution: 'temurin'
+          architecture: x64
+      - name: Run the Maven
+        run: |
+          cd .\1103_hw1\testcase
+          .\test.ps1
