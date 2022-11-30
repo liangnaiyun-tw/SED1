@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     static BufferedReader bufferedReader;
@@ -12,20 +14,20 @@ public class Main {
         try {
             String inputLine;
             String[] inputTokens;
-            Traverse traverse = null;
+            Map<String, Traverse> map = new HashMap<>();
 
             bufferedReader = new BufferedReader(new FileReader(args[0]));
             while ((inputLine = bufferedReader.readLine()) != null) {
                 try {
                     inputTokens = inputLine.split("\\s+");
                     if (inputTokens.length == 3 && inputTokens[0].equals("Create")
-                            && inputTokens[2].equals("SkipList")) {
-                        traverse = new SkipList(inputTokens[1]);
+                            && inputTokens[2].equals("SkipList") && !map.containsKey(inputTokens[1])) {
+                        map.put(inputTokens[1], new SkipList(inputTokens[1]));
                     } else if (inputTokens.length == 3 && inputTokens[0].equals("Create")
-                            && inputTokens[2].equals("List")) {
-                        traverse = new ListDataStructure(inputTokens[1]);
+                            && inputTokens[2].equals("List") && !map.containsKey(inputTokens[1])) {
+                        map.put(inputTokens[1], new ListDataStructure(inputTokens[1]));
                     } else {
-                        parseCommandActions(traverse, inputLine);
+                        parseCommandActions(map, inputLine);
                     }
                 } catch (Exception e) {
                     System.out.println("Input Error");
@@ -37,26 +39,33 @@ public class Main {
 
     }
 
-    private static void parseCommandActions(Traverse traverse, String inpuString) {
+    private static void parseCommandActions(Map<String, Traverse> map, String inpuString) {
         try {
+            Traverse traverse;
             String[] tokeStrings = inpuString.split("\\s+");
             if (tokeStrings.length == 3 && tokeStrings[0].equals("Add")
-                    && traverse.getName().equals(tokeStrings[1])) {
+                    && map.containsKey(tokeStrings[1])) {
+                traverse = map.get(tokeStrings[1]);
                 parseCommandAddObject(traverse, tokeStrings[2]);
             } else if (tokeStrings.length == 2 && tokeStrings[0].equals("Length")
-                    && traverse.getName().equals(tokeStrings[1])) {
+                    && map.containsKey(tokeStrings[1])) {
+                traverse = map.get(tokeStrings[1]);
                 parseCommandGetListLength(traverse);
             } else if (tokeStrings.length == 2 && tokeStrings[0].equals("Size")
-                    && traverse.getName().equals(tokeStrings[1])) {
+                    && map.containsKey(tokeStrings[1])) {
+                traverse = map.get(tokeStrings[1]);
                 parseCommandGetListSize(traverse);
             } else if (tokeStrings.length == 3 && tokeStrings[0].equals("Get")
-                    && tokeStrings[1].equals(traverse.getName())) {
+                    && map.containsKey(tokeStrings[1])) {
+                traverse = map.get(tokeStrings[2]);
                 parseCommandGetStringByIndex(traverse, Integer.parseInt(tokeStrings[2]));
             } else if (tokeStrings.length == 3 && tokeStrings[0].equals("GetNode")
-                    && tokeStrings[1].equals(traverse.getName())) {
+                    && map.containsKey(tokeStrings[1])) {
+                traverse = map.get(tokeStrings[2]);
                 parseCommandGetNodeByIndex(traverse, Integer.parseInt(tokeStrings[2]));
             } else if (tokeStrings.length == 2 && tokeStrings[0].equals("PrintOutList")
-                    && traverse.getName().equals(tokeStrings[1])) {
+                    && map.containsKey(tokeStrings[1])) {
+                traverse = map.get(tokeStrings[1]);
                 parseCommandPrintOutList(traverse);
             } else {
                 System.out.println("No command matched");
