@@ -2,6 +2,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Review {
+  public Review(Student student, Student reviewer, Assignment assignment) {
+    this.student = student;
+    this.reviewer = reviewer;
+    this.assignment = assignment;
+  }
+
   private Student student;
   private Student reviewer;
   private Assignment assignment;

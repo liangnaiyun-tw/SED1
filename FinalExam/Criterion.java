@@ -30,4 +30,13 @@ public class Criterion {
   public void addDescriptor(Descriptor descriptor) {
     this.descriptors.add(descriptor);
   }
+
+  public Descriptor getDescriptorByLevelName(String levelName) {
+    for (Descriptor des : this.descriptors) {
+      if (des.getLevel().getName().equals(levelName)) {
+        return des;
+      }
+    }
+    return null;
+  }
 }
