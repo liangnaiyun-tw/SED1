@@ -39,4 +39,12 @@ public class Criterion {
     }
     return null;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof Criterion))
+      return false;
+    Criterion objCri = (Criterion) obj;
+    return (objCri.name == this.name);
+  }
 }
