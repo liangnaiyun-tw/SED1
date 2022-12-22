@@ -35,8 +35,15 @@ public class RubricBuilder {
     this.levelToRate.put(name, Integer.valueOf(rate));
   }
 
-  public void addCriterion(String criterion, String level, String description) {
+  public void addCriterion(String criterion, String level, String description) throws Exception {
     Criterion targetCriterion = this.getCriterionByName(criterion);
+    if (targetCriterion.getDescriptorByLevelName(level) != null) {
+      // throw exception and clear all criterions if the <criterion, level> pair
+      // exists
+      this.criterions.clear();
+      throw new Exception("Error");
+    }
+
     Level newLevel = new Level(level, this.levelToRate.get(level));
     Descriptor newDescriptor = new Descriptor(targetCriterion, newLevel, description);
     targetCriterion.addDescriptor(newDescriptor);
