@@ -72,7 +72,7 @@ public class Main {
   private static void parseCommandAddReview(ReviewSystem reviewSystem, String[] inputTokens) {
     String line;
     String[] tokens;
-    BufferedReader reviewFileBuffer;
+    List<BufferedReader> reviewFileBuffer = new ArrayList<>();
 
     try {
       for (int i = 3; i < inputTokens.length; ++i) {
