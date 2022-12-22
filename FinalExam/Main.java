@@ -65,7 +65,7 @@ public class Main {
 
       reviewSystem.addAssignment(inputTokens[1], builder.build());
     } catch (Exception fileError) {
-      System.out.println(fileError.getMessage());
+      System.out.println("Error");
     }
   }
 
