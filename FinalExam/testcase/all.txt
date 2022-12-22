@@ -1,0 +1,21 @@
+1. 沒有studen這個command
+2. 自己評自己
+3. assignment 在一個不存在的assignment
+4. 沒有3-5人
+5. 評自己又沒有3-5人 (因為先判斷自己，所以print Cannot review one’s own assignment.
+6. 沒有3-5人 ，又不存在的assignment
+7. 對不存在的student做assignment
+8. strategy不存在， 三個methods
+9. 不存在的score
+10. criterial 不存在
+11. 先沒有3-5人，assingnment 裡面沒有資料，但要算平均
+12. assingnment 裡面沒有資料，但要算平均， 然後在進行assign
+13. 對還未assign的student做三個method
+14. 新增一個level Good4 只有knowlege(第一項有good) 然後對001做計算(3個methods
+15. score裡面沒有相對應的數量 ex 有四個demintion要評分 但只有3個score
+16. median算法
+17. 同一個assignment被多個criterial
+18. 超過3-5人
+19. 連續兩個assignment做運算
+20. 被同樣的人assign 打多次分數 
+21. 同一個人被assign多次
