@@ -93,6 +93,8 @@ public class Main {
       return;
     }
 
+    StringBuilder result = new StringBuilder();
+
     try {
       for (int i = 3; i < inputTokens.length; ++i) {
         tokens = inputTokens[i].split(",");
@@ -103,10 +105,12 @@ public class Main {
           scores.add(line);
         }
 
-        reviewSystem.addReview(inputTokens[1], tokens[0], inputTokens[2], scores);
+        result.append(reviewSystem.addReview(inputTokens[1], tokens[0], inputTokens[2], scores))
+            .append("\n");
+        System.out.print(result);
       }
     } catch (Exception error) {
-      System.out.println(error.getMessage());
+      System.out.println("Error");
     }
   }
 
