@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Review {
@@ -11,7 +11,7 @@ public class Review {
   private Student student;
   private Student reviewer;
   private Assignment assignment;
-  private Map<Criterion, Level> reviews = new HashMap<>();
+  private Map<Criterion, Level> reviews = new LinkedHashMap<>();
 
   public Student getStudent() {
     return student;
