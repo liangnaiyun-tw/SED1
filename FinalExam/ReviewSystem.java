@@ -46,7 +46,7 @@ public class ReviewSystem {
         List<Criterion> ret = new ArrayList<>();
         double minScore = 100.0;
         for(Criterion c: criteria){
-            minScore = Math.max(map.get(c),minScore);
+            minScore = Math.min(map.get(c),minScore);
         }
         System.out.print(String.format("Assignment: %s, Student: %s, Weakness:",assignmentId,
             studentId));
@@ -68,6 +68,17 @@ public class ReviewSystem {
     }
 
     public void addReview(String assignmentId, String reviewer, String receiver, List<String> levels) {
+    }
+
+    public void printRubric(String assignmentId){
+        Assignment assignment = getAssignmentById(assignmentId);
+        List<Criterion> criteria = assignment.getRubric().getCriteria();
+        for(Criterion c: criteria){
+            List<Descriptor> descriptors = c.getDescriptors();
+            for(Descriptor d : descriptors){
+                System.out.println(String.format("(%s,%s) %s",c.getName(),d.getLevel(),d.getDescription()));
+            }
+        }
     }
 
     private Assignment getAssignmentById(String assignmentId) {
