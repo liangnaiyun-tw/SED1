@@ -38,7 +38,9 @@ public class ReviewSystem {
     // output result
     for (Map.Entry<Criterion, Double> entry : map.entrySet()) {
       // output like: Assignment: A1, Criterion: Thinking/Inquiry, AvgScore: 2.7
-      if (reviewCountMap.get(entry.getKey()) == 0) {
+      if (
+        reviewCountMap.get(entry.getKey()) == 0 || reviewCountMap.size() == 0
+      ) {
         System.out.println("Error");
       }
 
