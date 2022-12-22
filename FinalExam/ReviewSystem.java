@@ -8,7 +8,7 @@ public class ReviewSystem {
     private List<Student> students;
     private List<Assignment> assignments;
 
-    public Map<Criterion, Double> averageCriterion(String assignmentId) {
+    public Map<Criterion, Double> averageCriterion(String assignmentId) throws Exception {
         Assignment assignment = getAssignmentById(assignmentId);
         Map<Criterion, Double> map = new LinkedHashMap<>();
         int totalItem = 0;
@@ -45,7 +45,7 @@ public class ReviewSystem {
     public Double calculateScore(
             String assignmentId,
             String studentId,
-            RankingStrategy rankingStrategy) {
+            RankingStrategy rankingStrategy) throws Exception {
         Double score = rankingStrategy.calculateScore(
                 getAssignmentById(assignmentId),
                 getStudentById(studentId));
@@ -61,7 +61,7 @@ public class ReviewSystem {
     public List<Criterion> findStrength(
             String assignmentId,
             String studentId,
-            RankingStrategy rankingStrategy) {
+            RankingStrategy rankingStrategy) throws Exception {
         Assignment assignment = getAssignmentById(assignmentId);
         Student student = getStudentById(studentId);
         Map<Criterion, Double> map = rankingStrategy.calculateScoreGroupByCriterion(
@@ -91,7 +91,7 @@ public class ReviewSystem {
     public List<Criterion> findWeakness(
             String assignmentId,
             String studentId,
-            RankingStrategy rankingStrategy) {
+            RankingStrategy rankingStrategy) throws Exception {
         Assignment assignment = getAssignmentById(assignmentId);
         Student student = getStudentById(studentId);
         Map<Criterion, Double> map = rankingStrategy.calculateScoreGroupByCriterion(
@@ -118,11 +118,11 @@ public class ReviewSystem {
         return ret;
     }
 
-    public void addAssignment(String assignmentId, Rubric rubric) {
+    public void addAssignment(String assignmentId, Rubric rubric) throws Exception {
         this.assignments.add(getAssignmentById(assignmentId));
     }
 
-    public void addStudent(String studentId) {
+    public void addStudent(String studentId) throws Exception {
         this.students.add(getStudentById(studentId));
     }
 
@@ -130,7 +130,7 @@ public class ReviewSystem {
             String assignmentId,
             String reviewer,
             String receiver,
-            List<String> levels) {
+            List<String> levels) throws Exception {
         Assignment assignment = this.getAssignmentById(assignmentId);
         Student reviewerStudent = this.getStudentById(reviewer);
         Student receiverStudent = this.getStudentById(receiver);
@@ -156,7 +156,7 @@ public class ReviewSystem {
         receiverStudent.addReview(newReview);
     }
 
-    public void printRubric(String assignmentId) {
+    public void printRubric(String assignmentId) throws Exception {
         Assignment assignment = getAssignmentById(assignmentId);
         List<Criterion> criteria = assignment.getRubric().getCriteria();
         for (Criterion c : criteria) {
@@ -172,23 +172,23 @@ public class ReviewSystem {
         }
     }
 
-    private Assignment getAssignmentById(String assignmentId) {
+    private Assignment getAssignmentById(String assignmentId) throws Exception {
         Assignment ret = null;
         for (Assignment assignment : assignments) {
             if (assignment.getAssignmentId().equals(assignmentId)) {
                 ret = assignment;
             }
         }
-        return ret;
+        throw new Exception("Error");
     }
 
-    private Student getStudentById(String studentId) {
+    private Student getStudentById(String studentId) throws Exception {
         Student ret = null;
         for (Student student : students) {
             if (student.getStudentId().equals(studentId)) {
                 ret = student;
             }
         }
-        return ret;
+        throw new Exception("Error");
     }
 }
