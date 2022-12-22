@@ -18,6 +18,9 @@ public class ReviewSystem {
     Assignment assignment = getAssignmentById(assignmentId);
     Map<Criterion, Double> map = new LinkedHashMap<>();
     Map<Criterion, Integer> reviewCountMap = new LinkedHashMap<>();
+    if (assignment.getReviews().size() == 0) {
+      System.out.println("Error");
+    }
     for (Review review : assignment.getReviews()) {
       for (Map.Entry<Criterion, Level> entry : review.getReviews().entrySet()) {
         if (!map.containsKey(entry.getKey())) {
