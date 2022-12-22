@@ -1,10 +1,14 @@
-import java.util.List;
-
 public class Descriptor {
 
   private Criterion criterion;
   private Level level;
   private String description;
+
+  public Descriptor(Criterion criterion, Level level, String description) {
+    this.criterion = criterion;
+    this.level = level;
+    this.description = description;
+  }
 
   public Criterion getCriterion() {
     return criterion;

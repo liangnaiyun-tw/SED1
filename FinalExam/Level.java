@@ -6,6 +6,11 @@ public class Level {
   private String name;
   private int rate;
 
+  public Level(String name, int rate) {
+    this.name = name;
+    this.rate = rate;
+  }
+
   public List<Descriptor> getDescriptors() {
     return descriptors;
   }
