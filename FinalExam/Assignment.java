@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Assignment {
@@ -5,6 +6,12 @@ public class Assignment {
   private String assignmentId;
   private Rubric rubric;
   private List<Review> reviews;
+
+  public Assignment(String assignmentId, Rubric rubric) {
+    this.assignmentId = assignmentId;
+    this.rubric = rubric;
+    this.reviews = new ArrayList<>();
+  }
 
   public String getAssignmentId() {
     return assignmentId;

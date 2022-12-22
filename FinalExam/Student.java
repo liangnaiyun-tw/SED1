@@ -5,6 +5,11 @@ public class Student {
   private String studentId;
   private List<Review> receivedReviews = new ArrayList<>();
 
+  public Student(String studentId) {
+    this.studentId = studentId;
+    this.receivedReviews = new ArrayList<>();
+  }
+
   public String getStudentId() {
     return studentId;
   }
@@ -13,7 +18,7 @@ public class Student {
     this.studentId = studentId;
   }
 
-  public void addReview(Review review){
+  public void addReview(Review review) {
     this.receivedReviews.add(review);
   }
 

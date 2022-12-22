@@ -119,11 +119,13 @@ public class ReviewSystem {
     }
 
     public void addAssignment(String assignmentId, Rubric rubric) {
-        this.assignments.add(getAssignmentById(assignmentId));
+        Assignment newAssignment = new Assignment(assignmentId, rubric);
+        this.assignments.add(newAssignment);
     }
 
     public void addStudent(String studentId) {
-        this.students.add(getStudentById(studentId));
+        Student newStudent = new Student(studentId);
+        this.students.add(newStudent);
     }
 
     public void addReview(
