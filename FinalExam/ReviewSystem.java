@@ -18,7 +18,6 @@ public class ReviewSystem {
     Assignment assignment = getAssignmentById(assignmentId);
     Map<Criterion, Double> map = new LinkedHashMap<>();
     Map<Criterion, Integer> reviewCountMap = new LinkedHashMap<>();
-    int totalItem = 0;
     for (Review review : assignment.getReviews()) {
       for (Map.Entry<Criterion, Level> entry : review.getReviews().entrySet()) {
         if (!map.containsKey(entry.getKey())) {
@@ -36,12 +35,13 @@ public class ReviewSystem {
       }
     }
 
-    if (totalItem == 0) {
-      System.out.println("Error");
-    }
     // output result
     for (Map.Entry<Criterion, Double> entry : map.entrySet()) {
       // output like: Assignment: A1, Criterion: Thinking/Inquiry, AvgScore: 2.7
+      if (reviewCountMap.get(entry.getKey()) == 0) {
+        System.out.println("Error");
+      }
+
       System.out.println(
         String.format(
           "Assignment: %s, Criterion: %s, AvgScore: %.1f",
