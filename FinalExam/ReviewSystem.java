@@ -173,20 +173,18 @@ public class ReviewSystem {
     }
 
     private Assignment getAssignmentById(String assignmentId) throws Exception {
-        Assignment ret = null;
         for (Assignment assignment : assignments) {
             if (assignment.getAssignmentId().equals(assignmentId)) {
-                ret = assignment;
+                return assignment;
             }
         }
         throw new Exception("Error");
     }
 
     private Student getStudentById(String studentId) throws Exception {
-        Student ret = null;
         for (Student student : students) {
             if (student.getStudentId().equals(studentId)) {
-                ret = student;
+                return student;
             }
         }
         throw new Exception("Error");
