@@ -1,118 +1,210 @@
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ReviewSystem {
-    private List<Student> students;
-    private List<Assignment> assignments;
-    private RankingStrategy rankingStrategy;
 
-    public Map<Criterion, Double> averageCriterion(String assignmentId) {
-    }
+  private List<Student> students;
+  private List<Assignment> assignments;
+  private RankingStrategy rankingStrategy;
 
-    public Double calculateScore(String assignmentId, String studentId, RankingStrategy rankingStrategy) {
-    }
-
-    public List<Criterion> findStrength(String assignmentId, String studentId, RankingStrategy rankingStrategy) {
-        Assignment assignment = getAssignmentById(assignmentId);
-        Student student = getStudentById(studentId);
-        Map<Criterion, Double> map = rankingStrategy.calculateScoreGroupByCriterion(
-                assignment, student);
-        List<Criterion> criteria = assignment.getRubric().getCriteria();
-        List<Criterion> ret = new ArrayList<>();
-        double maxScore = 0.0;
-        for (Criterion c : criteria) {
-            maxScore = Math.max(map.get(c), maxScore);
+  public Map<Criterion, Double> averageCriterion(String assignmentId) {
+    Assignment assignment = getAssignmentById(assignmentId);
+    Map<Criterion, Double> map = new LinkedHashMap();
+    int totalItem = 0;
+    for (Review review : assignment.getReviews()) {
+      for (Map.Entry<Criterion, Level> entry : review.getReviews().entrySet()) {
+        totalItem++;
+        if (map.containsKey(entry.getKey())) {
+          map.put(entry.getKey(), Double.valueOf(entry.getValue().getRate()));
+        } else {
+          double currentRate = map.get(entry.getKey());
+          currentRate += entry.getValue().getRate();
+          map.put(entry.getKey(), currentRate);
         }
-        System.out.print(String.format("Assignment: %s, Student: %s, Strength:", assignmentId,
-                studentId));
-        for (Criterion c : criteria) {
-            if (map.get(c) == maxScore) {
-                ret.add(c);
-                System.out.print(" " + c.getName());
-            }
-        }
-        System.out.println();
-        return ret;
+      }
     }
 
-    public List<Criterion> findWeakness(String assignmentId, String studentId, RankingStrategy rankingStrategy) {
-        Assignment assignment = getAssignmentById(assignmentId);
-        Student student = getStudentById(studentId);
-        Map<Criterion, Double> map = rankingStrategy.calculateScoreGroupByCriterion(
-                assignment, student);
-        List<Criterion> criteria = assignment.getRubric().getCriteria();
-        List<Criterion> ret = new ArrayList<>();
-        double minScore = 100.0;
-        for(Criterion c: criteria){
-            minScore = Math.min(map.get(c),minScore);
-        }
-        System.out.print(String.format("Assignment: %s, Student: %s, Weakness:", assignmentId,
-                studentId));
-        for (Criterion c : criteria) {
-            if (map.get(c) == minScore) {
-                ret.add(c);
-                System.out.print(" " + c.getName());
-            }
-        }
-        System.out.println();
-        return ret;
+    if (totalItem == 0) {
+      System.out.println("Error");
+    }
+    // output result
+    for (Map.Entry<Criterion, Double> entry : map.entrySet()) {
+      // output like: Assignment: A1, Criterion: Thinking/Inquiry, AvgScore: 2.7
+      System.out.println(
+        String.format(
+          "Assignment: %s, Criterion: %s, AvgScore: %.1f",
+          assignmentId,
+          entry.getKey().getName(),
+          (entry.getValue() / totalItem)
+        )
+      );
     }
 
-    public void addAssignment(String assignmentId, Rubric rubric) {
+    return map;
+  }
 
+  public Double calculateScore(
+    String assignmentId,
+    String studentId,
+    RankingStrategy rankingStrategy
+  ) {
+    Double score = rankingStrategy.calculateScore(
+      getAssignmentById(assignmentId),
+      getStudentById(studentId)
+    );
+    System.out.println(
+      String.format(
+        "Assignment: %s, Student: %s, Score: %.1f",
+        assignmentId,
+        studentId,
+        score
+      )
+    );
+    return score;
+  }
+
+  public List<Criterion> findStrength(
+    String assignmentId,
+    String studentId,
+    RankingStrategy rankingStrategy
+  ) {
+    Assignment assignment = getAssignmentById(assignmentId);
+    Student student = getStudentById(studentId);
+    Map<Criterion, Double> map = rankingStrategy.calculateScoreGroupByCriterion(
+      assignment,
+      student
+    );
+    List<Criterion> criteria = assignment.getRubric().getCriteria();
+    List<Criterion> ret = new ArrayList<>();
+    double maxScore = 0.0;
+    for (Criterion c : criteria) {
+      maxScore = Math.max(map.get(c), maxScore);
     }
-
-    public void addStudent(String studentId) {
+    System.out.print(
+      String.format(
+        "Assignment: %s, Student: %s, Strength:",
+        assignmentId,
+        studentId
+      )
+    );
+    for (Criterion c : criteria) {
+      if (map.get(c) == maxScore) {
+        ret.add(c);
+        System.out.print(" " + c.getName());
+      }
     }
+    System.out.println();
+    return ret;
+  }
 
-    public void addReview(String assignmentId, String reviewer, String receiver, List<String> levels) {
-        Assignment assignment = this.getAssignmentById(assignmentId);
-        Student reviewerStudent = this.getStudentById(reviewer);
-        Student receiverStudent = this.getStudentById(receiver);
-        Rubric rubric = assignment.getRubric();
-        Review newReview = new Review(receiverStudent, reviewerStudent, assignment);
-
-        System.out.print(String.format("%s-%s was reviewed by %s]. Level:", assignmentId, receiver, reviewer));
-        for (int i = 0; i < rubric.getCriteria().size(); i++) {
-            System.out.print(String.format(" %s", levels.get(i)));
-            Criterion criterion = rubric.getCriteria().get(i);
-            Level level = criterion.getDescriptorByLevelName(levels.get(i)).getLevel();
-            newReview.putReviews(criterion, level);
-        }
-        System.out.println("");
-        assignment.addReview(newReview);
-        receiverStudent.addReview(newReview);
+  public List<Criterion> findWeakness(
+    String assignmentId,
+    String studentId,
+    RankingStrategy rankingStrategy
+  ) {
+    Assignment assignment = getAssignmentById(assignmentId);
+    Student student = getStudentById(studentId);
+    Map<Criterion, Double> map = rankingStrategy.calculateScoreGroupByCriterion(
+      assignment,
+      student
+    );
+    List<Criterion> criteria = assignment.getRubric().getCriteria();
+    List<Criterion> ret = new ArrayList<>();
+    double minScore = 100.0;
+    for (Criterion c : criteria) {
+      minScore = Math.min(map.get(c), minScore);
     }
-
-    public void printRubric(String assignmentId){
-        Assignment assignment = getAssignmentById(assignmentId);
-        List<Criterion> criteria = assignment.getRubric().getCriteria();
-        for(Criterion c: criteria){
-            List<Descriptor> descriptors = c.getDescriptors();
-            for(Descriptor d : descriptors){
-                System.out.println(String.format("(%s,%s) %s",c.getName(),d.getLevel(),d.getDescription()));
-            }
-        }
+    System.out.print(
+      String.format(
+        "Assignment: %s, Student: %s, Weakness:",
+        assignmentId,
+        studentId
+      )
+    );
+    for (Criterion c : criteria) {
+      if (map.get(c) == minScore) {
+        ret.add(c);
+        System.out.print(" " + c.getName());
+      }
     }
+    System.out.println();
+    return ret;
+  }
 
-    private Assignment getAssignmentById(String assignmentId) {
-        Assignment ret = null;
-        for (Assignment assignment : assignments) {
-            if (assignment.getAssignmentId().equals(assignmentId)) {
-                ret = assignment;
-            }
-        }
-        return ret;
-    }
+  public void addAssignment(String assignmentId, Rubric rubric) {}
 
-    private Student getStudentById(String studentId) {
-        Student ret = null;
-        for (Student student : students) {
-            if (student.getStudentId().equals(studentId)) {
-                ret = student;
-            }
-        }
-        return ret;
+  public void addStudent(String studentId) {}
+
+  public void addReview(
+    String assignmentId,
+    String reviewer,
+    String receiver,
+    List<String> levels
+  ) {
+    Assignment assignment = this.getAssignmentById(assignmentId);
+    Student reviewerStudent = this.getStudentById(reviewer);
+    Student receiverStudent = this.getStudentById(receiver);
+    Rubric rubric = assignment.getRubric();
+    Review newReview = new Review(receiverStudent, reviewerStudent, assignment);
+
+    System.out.print(
+      String.format(
+        "%s-%s was reviewed by %s]. Level:",
+        assignmentId,
+        receiver,
+        reviewer
+      )
+    );
+    for (int i = 0; i < rubric.getCriteria().size(); i++) {
+      System.out.print(String.format(" %s", levels.get(i)));
+      Criterion criterion = rubric.getCriteria().get(i);
+      Level level = criterion
+        .getDescriptorByLevelName(levels.get(i))
+        .getLevel();
+      newReview.putReviews(criterion, level);
     }
+    System.out.println("");
+    assignment.addReview(newReview);
+    receiverStudent.addReview(newReview);
+  }
+
+  public void printRubric(String assignmentId) {
+    Assignment assignment = getAssignmentById(assignmentId);
+    List<Criterion> criteria = assignment.getRubric().getCriteria();
+    for (Criterion c : criteria) {
+      List<Descriptor> descriptors = c.getDescriptors();
+      for (Descriptor d : descriptors) {
+        System.out.println(
+          String.format(
+            "(%s,%s) %s",
+            c.getName(),
+            d.getLevel(),
+            d.getDescription()
+          )
+        );
+      }
+    }
+  }
+
+  private Assignment getAssignmentById(String assignmentId) {
+    Assignment ret = null;
+    for (Assignment assignment : assignments) {
+      if (assignment.getAssignmentId().equals(assignmentId)) {
+        ret = assignment;
+      }
+    }
+    return ret;
+  }
+
+  private Student getStudentById(String studentId) {
+    Student ret = null;
+    for (Student student : students) {
+      if (student.getStudentId().equals(studentId)) {
+        ret = student;
+      }
+    }
+    return ret;
+  }
 }
