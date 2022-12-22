@@ -133,9 +133,13 @@ public class ReviewSystem {
     return ret;
   }
 
-  public void addAssignment(String assignmentId, Rubric rubric) {}
+  public void addAssignment(String assignmentId, Rubric rubric) {
+    this.assignments.add(getAssignmentById(assignmentId));
+  }
 
-  public void addStudent(String studentId) {}
+  public void addStudent(String studentId) {
+    this.students.add(getStudentById(studentId));
+  }
 
   public void addReview(
     String assignmentId,
