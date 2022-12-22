@@ -116,8 +116,8 @@ public class Main {
 
         result.append(reviewSystem.addReview(inputTokens[1], tokens[0], inputTokens[2], scores))
             .append("\n");
-        System.out.print(result);
       }
+      System.out.print(result);
     } catch (Exception error) {
       System.out.println("Error");
     }

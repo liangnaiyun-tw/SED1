@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -16,7 +17,7 @@ public class MedianRankingStrategy implements RankingStrategy {
       Student student) {
     Map<Criterion, List<Integer>> criterionRates = new LinkedHashMap<>();
     for (Criterion criterion : assignment.getRubric().getCriteria()) {
-      criterionRates.put(criterion, Collections.emptyList());
+      criterionRates.put(criterion, new ArrayList<>());
     }
 
     List<Review> reviews = student.getReceivedReviews();
