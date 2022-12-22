@@ -1,4 +1,4 @@
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,7 +8,7 @@ public class RubricBuilder {
   private List<Criterion> criterions;
 
   public RubricBuilder() {
-    this.levelToRate = new HashMap<>();
+    this.levelToRate = new LinkedHashMap<>();
   }
 
   public List<Criterion> getCriterions() {

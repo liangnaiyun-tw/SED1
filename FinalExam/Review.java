@@ -1,11 +1,17 @@
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Review {
+  public Review(Student student, Student reviewer, Assignment assignment) {
+    this.student = student;
+    this.reviewer = reviewer;
+    this.assignment = assignment;
+  }
+
   private Student student;
   private Student reviewer;
   private Assignment assignment;
-  private Map<Criterion, Level> reviews = new HashMap<>();
+  private Map<Criterion, Level> reviews = new LinkedHashMap<>();
 
   public Student getStudent() {
     return student;

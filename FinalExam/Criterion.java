@@ -30,4 +30,21 @@ public class Criterion {
   public void addDescriptor(Descriptor descriptor) {
     this.descriptors.add(descriptor);
   }
+
+  public Descriptor getDescriptorByLevelName(String levelName) {
+    for (Descriptor des : this.descriptors) {
+      if (des.getLevel().getName().equals(levelName)) {
+        return des;
+      }
+    }
+    return null;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (!(obj instanceof Criterion))
+      return false;
+    Criterion objCri = (Criterion) obj;
+    return (objCri.name == this.name);
+  }
 }
