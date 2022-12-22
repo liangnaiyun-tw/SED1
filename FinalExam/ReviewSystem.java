@@ -30,7 +30,7 @@ public class ReviewSystem {
         for(Criterion c: criteria){
             if(map.get(c)==maxScore){
                 ret.add(c);
-                System.out.print(" " + criteria.getName());
+                System.out.print(" " + c.getName());
             }
         }
         System.out.println();
@@ -53,7 +53,7 @@ public class ReviewSystem {
         for(Criterion c: criteria){
             if(map.get(c)==minScore){
                 ret.add(c);
-                System.out.print(" " + criteria.getName());
+                System.out.print(" " + c.getName());
             }
         }
         System.out.println();
