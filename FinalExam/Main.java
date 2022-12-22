@@ -188,7 +188,7 @@ public class Main {
             parseCommandAddLevels(inputTokens);
           } else if (inputTokens.length == 3 && inputTokens[0].equals("designCriterion")) {
             parseCommandAddRubric(reviewSystem, inputTokens);
-          } else if (inputTokens.length >= 4 && inputTokens[0].equals("assignment")) {
+          } else if (inputTokens.length >= 3 && inputTokens[0].equals("assignment")) {
             parseCommandAddReview(reviewSystem, inputTokens);
           } else if (inputTokens.length == 2 && inputTokens[0].equals("printRubric")) {
             parseCommandPrintRubric(reviewSystem, inputTokens);
