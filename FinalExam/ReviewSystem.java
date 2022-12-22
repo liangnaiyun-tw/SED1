@@ -17,16 +17,21 @@ public class ReviewSystem {
     throws Exception {
     Assignment assignment = getAssignmentById(assignmentId);
     Map<Criterion, Double> map = new LinkedHashMap<>();
+    Map<Criterion, Integer> reviewCountMap = new LinkedHashMap<>();
     int totalItem = 0;
     for (Review review : assignment.getReviews()) {
       for (Map.Entry<Criterion, Level> entry : review.getReviews().entrySet()) {
-        totalItem++;
         if (!map.containsKey(entry.getKey())) {
           map.put(entry.getKey(), Double.valueOf(entry.getValue().getRate()));
+          reviewCountMap.put(entry.getKey(), 1);
         } else {
           double currentRate = map.get(entry.getKey());
           currentRate += entry.getValue().getRate();
           map.put(entry.getKey(), currentRate);
+          reviewCountMap.put(
+            entry.getKey(),
+            reviewCountMap.get(entry.getKey()) + 1
+          );
         }
       }
     }
@@ -42,7 +47,7 @@ public class ReviewSystem {
           "Assignment: %s, Criterion: %s, AvgScore: %.1f",
           assignmentId,
           entry.getKey().getName(),
-          (entry.getValue() / map.size())
+          (entry.getValue() / reviewCountMap.get(entry.getKey()))
         )
       );
     }
