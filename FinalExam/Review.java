@@ -1,10 +1,11 @@
 import java.util.HashMap;
+import java.util.Map;
 
 public class Review {
   private Student student;
   private Student reviewer;
   private Assignment assignment;
-  private Map<Criteron,Level> descriptors = new HashMap<>();
+  private Map<Criterion,Level> descriptors = new HashMap<>();
 
   public Student getStudent() {
     return student;
@@ -34,11 +35,11 @@ public class Review {
     this.descriptors.put(c,l);
   }
 
-  public Map<Criteron, Level> getDescriptors() {
+  public Map<Criterion, Level> getDescriptors() {
     return descriptors;
   }
 
-  public void setDescriptors(Map<Criteron, Level> descriptors) {
+  public void setDescriptors(Map<Criterion, Level> descriptors) {
     this.descriptors = descriptors;
   }
 }
