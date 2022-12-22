@@ -51,16 +51,12 @@ public class Main {
       }
 
       while ((line = criterionBuffer.readLine()) != null) {
-        try {
-          tokens = line.split("\\t+");
-          if (tokens.length != 3 || tokens[2].isEmpty()) {
-            throw new Exception("Error");
-          }
-
-          builder.addCriterion(tokens[0], tokens[1], tokens[2]);
-        } catch (Exception criterionError) {
-          System.out.println(criterionError.getMessage());
+        tokens = line.split("\\t+");
+        if (tokens.length != 3 || tokens[2].isEmpty()) {
+          throw new Exception("Error");
         }
+
+        builder.addCriterion(tokens[0], tokens[1], tokens[2]);
       }
 
       reviewSystem.addAssignment(inputTokens[1], builder.build());
@@ -72,19 +68,33 @@ public class Main {
   private static void parseCommandAddReview(ReviewSystem reviewSystem, String[] inputTokens) {
     String line;
     String[] tokens;
-    List<BufferedReader> reviewFileBuffer = new ArrayList<>();
+    BufferedReader reviewFileBuffer;
+
+    try {
+      reviewSystem.getAssignmentById(inputTokens[1]);
+      reviewSystem.getStudentById(inputTokens[2]);
+      for (int i = 3; i < inputTokens.length; ++i) {
+        tokens = inputTokens[i].split(",");
+
+        if (tokens.length != 2) {
+          throw new Exception("Error");
+        }
+        reviewSystem.getStudentById(tokens[0]);
+        BufferedReader existBuffer = new BufferedReader(new FileReader(tokens[1]));
+        existBuffer.close();
+      }
+    } catch (Exception existError) {
+      System.out.println("Error");
+      return;
+    }
 
     try {
       for (int i = 3; i < inputTokens.length; ++i) {
         tokens = inputTokens[i].split(",");
-        if (tokens.length != 2) {
-          throw new Exception("Error");
-        }
         if (tokens[0].equals(inputTokens[2])) {
           throw new Exception("Cannot review one's own assignment.");
         }
       }
-
       if (inputTokens.length < 6 || inputTokens.length > 8) {
         throw new Exception("Assignment should be reviewed by 3-5 students.");
       }
@@ -94,7 +104,6 @@ public class Main {
     }
 
     StringBuilder result = new StringBuilder();
-
     try {
       for (int i = 3; i < inputTokens.length; ++i) {
         tokens = inputTokens[i].split(",");
@@ -116,6 +125,7 @@ public class Main {
 
   private static void parseCommandPrintRubric(ReviewSystem reviewSystem, String[] inputTokens) {
     try {
+      reviewSystem.getAssignmentById(inputTokens[1]);
       reviewSystem.printRubric(inputTokens[1]);
     } catch (Exception printError) {
       System.out.println(printError.getMessage());
@@ -125,6 +135,7 @@ public class Main {
   private static void parseCommandAverageCriterion(ReviewSystem reviewSystem,
       String[] inputTokens) {
     try {
+      reviewSystem.getAssignmentById(inputTokens[1]);
       reviewSystem.averageCriterion(inputTokens[1]);
     } catch (Exception error) {
       System.out.println(error.getMessage());
@@ -143,6 +154,8 @@ public class Main {
 
   private static void parseCommandCalculateScore(ReviewSystem reviewSystem, String[] inputTokens) {
     try {
+      reviewSystem.getAssignmentById(inputTokens[1]);
+      reviewSystem.getStudentById(inputTokens[2]);
       RankingStrategy rankingStrategy = getRankingStrategy(inputTokens[3]);
       reviewSystem.calculateScore(inputTokens[1], inputTokens[2], rankingStrategy);
     } catch (Exception error) {
@@ -152,6 +165,8 @@ public class Main {
 
   private static void parseCommandFindStrength(ReviewSystem reviewSystem, String[] inputTokens) {
     try {
+      reviewSystem.getAssignmentById(inputTokens[1]);
+      reviewSystem.getStudentById(inputTokens[2]);
       RankingStrategy rankingStrategy = getRankingStrategy(inputTokens[3]);
       reviewSystem.findStrength(inputTokens[1], inputTokens[2], rankingStrategy);
     } catch (Exception error) {
@@ -161,6 +176,8 @@ public class Main {
 
   private static void parseCommandFindWeakness(ReviewSystem reviewSystem, String[] inputTokens) {
     try {
+      reviewSystem.getAssignmentById(inputTokens[1]);
+      reviewSystem.getStudentById(inputTokens[2]);
       RankingStrategy rankingStrategy = getRankingStrategy(inputTokens[3]);
       reviewSystem.findWeakness(inputTokens[1], inputTokens[2], rankingStrategy);
     } catch (Exception error) {
