@@ -166,7 +166,7 @@ public class ReviewSystem {
                         String.format(
                                 "(%s,%s) %s",
                                 c.getName(),
-                                d.getLevel(),
+                                d.getLevel().getName(),
                                 d.getDescription()));
             }
         }
