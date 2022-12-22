@@ -11,7 +11,7 @@ public class ReviewSystem {
 
     public Map<Criterion, Double> averageCriterion(String assignmentId) {
         Assignment assignment = getAssignmentById(assignmentId);
-        Map<Criterion, Double> map = new LinkedHashMap();
+        Map<Criterion, Double> map = new LinkedHashMap<>();
         int totalItem = 0;
         for (Review review : assignment.getReviews()) {
             for (Map.Entry<Criterion, Level> entry : review.getReviews().entrySet()) {
