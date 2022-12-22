@@ -7,7 +7,6 @@ public class ReviewSystem {
 
     private List<Student> students;
     private List<Assignment> assignments;
-    private RankingStrategy rankingStrategy;
 
     public Map<Criterion, Double> averageCriterion(String assignmentId) {
         Assignment assignment = getAssignmentById(assignmentId);
