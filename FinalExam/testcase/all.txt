@@ -19,3 +19,5 @@
 19. 連續兩個assignment做運算
 20. 被同樣的人assign 打多次分數 
 21. 同一個人被assign多次
+22. 不同人數的assignment
+23. 重複的student
