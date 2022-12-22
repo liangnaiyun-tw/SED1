@@ -6,7 +6,7 @@ import java.util.Map;
 public class MeanRankingStrategy implements RankingStrategy {
 
   @Override
-  public double calculateScore(Assignment assignment, Student student){
+  public double calculateScore(Assignment assignment, Student student) throws Exception {
     List<Review> receivedReviews = student.getReceivedReviews();
     double total = 0;
     int cnt = 0;
@@ -19,6 +19,7 @@ public class MeanRankingStrategy implements RankingStrategy {
         }
       }
     }
+    if(cnt==0)  throw new Exception("Error");
     return total/cnt;
   }
 
