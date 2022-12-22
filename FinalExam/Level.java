@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Level {
@@ -9,6 +10,7 @@ public class Level {
   public Level(String name, int rate) {
     this.name = name;
     this.rate = rate;
+    descriptors = new ArrayList<>();
   }
 
   public List<Descriptor> getDescriptors() {
