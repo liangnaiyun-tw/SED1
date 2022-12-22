@@ -5,7 +5,7 @@ public class Review {
   private Student student;
   private Student reviewer;
   private Assignment assignment;
-  private Map<Criterion,Level> descriptors = new HashMap<>();
+  private Map<Criterion, Level> reviews = new HashMap<>();
 
   public Student getStudent() {
     return student;
@@ -31,15 +31,15 @@ public class Review {
     this.assignment = assignment;
   }
 
-  public void putDescriptors(Criterion c, Level l){
-    this.descriptors.put(c,l);
+  public void putReviews(Criterion c, Level l) {
+    this.reviews.put(c, l);
   }
 
-  public Map<Criterion, Level> getDescriptors() {
-    return descriptors;
+  public Map<Criterion, Level> getReviews() {
+    return reviews;
   }
 
-  public void setDescriptors(Map<Criterion, Level> descriptors) {
-    this.descriptors = descriptors;
+  public void setDescriptors(Map<Criterion, Level> reviews) {
+    this.reviews = reviews;
   }
 }
