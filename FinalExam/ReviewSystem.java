@@ -118,12 +118,14 @@ public class ReviewSystem {
         return ret;
     }
 
-    public void addAssignment(String assignmentId, Rubric rubric) throws Exception {
-        this.assignments.add(getAssignmentById(assignmentId));
+    public void addAssignment(String assignmentId, Rubric rubric) {
+        Assignment newAssignment = new Assignment(assignmentId, rubric);
+        this.assignments.add(newAssignment);
     }
 
-    public void addStudent(String studentId) throws Exception {
-        this.students.add(getStudentById(studentId));
+    public void addStudent(String studentId) {
+        Student newStudent = new Student(studentId);
+        this.students.add(newStudent);
     }
 
     public void addReview(
