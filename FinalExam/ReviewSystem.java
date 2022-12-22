@@ -16,7 +16,7 @@ public class ReviewSystem {
         for (Review review : assignment.getReviews()) {
             for (Map.Entry<Criterion, Level> entry : review.getReviews().entrySet()) {
                 totalItem++;
-                if (map.containsKey(entry.getKey())) {
+                if (!map.containsKey(entry.getKey())) {
                     map.put(entry.getKey(), Double.valueOf(entry.getValue().getRate()));
                 } else {
                     double currentRate = map.get(entry.getKey());
