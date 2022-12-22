@@ -44,7 +44,7 @@ public class ReviewSystem {
       if (
         reviewCountMap.get(entry.getKey()) == 0 || reviewCountMap.size() == 0
       ) {
-        System.out.println("Error");
+        throw new Exception("Error");
       }
 
       System.out.println(
