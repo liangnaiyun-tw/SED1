@@ -1,16 +1,14 @@
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RubricBuilder {
 
-  private List<Level> levels;
+  private Map<String, Integer> levelToRate;
   private List<Criterion> criterions;
 
-  public List<Level> getLevels() {
-    return levels;
-  }
-
-  public void setLevels(List<Level> levels) {
-    this.levels = levels;
+  public RubricBuilder() {
+    this.levelToRate = new HashMap<>();
   }
 
   public List<Criterion> getCriterions() {
@@ -21,15 +19,31 @@ public class RubricBuilder {
     this.criterions = criterions;
   }
 
-  public void addLevel(String name, int rate) {}
+  private Criterion getCriterionByName(String criterionName) {
+    for (Criterion criterion : this.criterions) {
+      if (criterion.getName().equals(criterionName))
+        return criterion;
+    }
+    Criterion newCriterion = new Criterion(criterionName);
+    this.criterions.add(newCriterion);
+    return newCriterion;
+  }
 
-  public void addCriterion(
-    String criterion,
-    String level,
-    String description
-  ) {}
+  public void addLevel(String name, int rate) {
+    this.levelToRate.put(name, Integer.valueOf(rate));
+  }
+
+  public void addCriterion(String criterion, String level, String description) {
+    Criterion targetCriterion = this.getCriterionByName(criterion);
+    Level newLevel = new Level(level, this.levelToRate.get(level));
+    Descriptor newDescriptor = new Descriptor(targetCriterion, newLevel, description);
+    targetCriterion.addDescriptor(newDescriptor);
+    newLevel.addDescriptor(newDescriptor);
+  }
 
   public Rubric build() {
-    return new Rubric();
+    Rubric newRubric = new Rubric();
+    newRubric.setCriteria(this.criterions);
+    return newRubric;
   }
 }
